@@ -12,12 +12,11 @@ class G {}
 // bin - binary 파일(컴파일로 생성된 바이트코드 파일)을 두는 폴더
 
 // 컴파일 방법
-// > javac -d 컴파일결과를둘폴더경로 소스파일경로
-// > javac -d ./bin ./src/Exam05.java
+//  javac -d 컴파일결과를둘폴더경로 소스파일경로
+//  javac -d ./bin ./src/Exam05.java
 
-// 다른 폴더에 있는 바이트코드 실행하기
-// > java -classpath 클래스파일이있는폴더위치 클래스명
-// > java -cp 클래스파일이있는폴더위치 클래스명
-// > java -classpath ./bin Exam05
-// > java -cp ./bin Exam05
-//    
+// 다른 폴더에 있는 바이트코드 실행한다.
+//  java -classpath 클래스파일이있는폴더위치 클래스명
+//  java -cp 클래스파일이있는폴더위치 클래스명
+//  java -classpath ./bin Exam05
+//  java -cp ./bin Exam05    
