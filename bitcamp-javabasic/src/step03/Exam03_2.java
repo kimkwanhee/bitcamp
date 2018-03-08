@@ -1,35 +1,25 @@
-//클래스 - 사용후
+// 레퍼런스와 인스턴스 - 인스턴스 주소 주고 받기 
 package step03;
 
-public class Exam02 {
+public class Exam03_2 {
     public static void main(String[] args) {
         class Score {
-        String name;
-        int kor;
-        int eng;
-        int math;
-        int sum;
-        float aver;
+            String name;
+            int kor;
+            int eng;
+            int math;
+            int sum;
+            float aver;
         }
 
-        //확보된 메모리를 사용하려면 주소를 보관시킬 필요가 있다.
-        Score[]arr = new Score[3];
-        
-        s = new Score();
+        // Score 레퍼런스 선언 + 인스턴스 생성(사용할 메모리 확보) 
+        Score s1 = new Score();
 
-        s.name = "홍길동";
-        s.kor = 100;
-        s.eng = 90;
-        s.math = 80;
-        s.sum = s.kor + s.eng + s.math;
-        s.aver = s.sum / 3;
+        // s1에 저장된 주소를 s2에도 저장한다.
+        Score s2 = s1;
 
-        System.out.printf("이름 : %s\n", s.name);
-        System.out.printf("국어 : %d\n", s.kor);
-        System.out.printf("영어 : %d\n", s.eng);
-        System.out.printf("수학 : %d\n", s.math);
-        System.out.printf("합계 : %d\n", s.sum);
-        System.out.printf("평균 : %1f\n", s.aver);
+        s1.name = "홍길동";
 
+        System.out.println(s2.name);
     }
 }

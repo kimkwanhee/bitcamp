@@ -1,35 +1,40 @@
-//클래스 - 사용후
+// 레퍼런스 배열 - 사용 후
 package step03;
 
-public class Exam02 {
+public class Exam02_2 {
     public static void main(String[] args) {
+        // 여러 개의 인스턴스 주소 저장하기
+        
         class Score {
-        String name;
-        int kor;
-        int eng;
-        int math;
-        int sum;
-        float aver;
+            String name;
+            int kor;
+            int eng;
+            int math;
+            int sum;
+            float aver;
         }
 
-        //확보된 메모리를 사용하려면 주소를 보관시킬 필요가 있다.
-        Score[]arr = new Score[3];
-        
-        s = new Score();
+        // Score 레퍼런스를 여러 개 준비한다. 
+        // => 레퍼런스 배열 준비 (인스턴스 배열이 아니다!)
+        Score[] arr = new Score[3];
 
-        s.name = "홍길동";
-        s.kor = 100;
-        s.eng = 90;
-        s.math = 80;
-        s.sum = s.kor + s.eng + s.math;
-        s.aver = s.sum / 3;
+        // 인스턴스를 만들어 레퍼런스 배열의 각 방에 그 주소를 저장한다.
+        arr[0] = new Score();
+        arr[1] = new Score();
+        arr[2] = new Score();
 
-        System.out.printf("이름 : %s\n", s.name);
-        System.out.printf("국어 : %d\n", s.kor);
-        System.out.printf("영어 : %d\n", s.eng);
-        System.out.printf("수학 : %d\n", s.math);
-        System.out.printf("합계 : %d\n", s.sum);
-        System.out.printf("평균 : %1f\n", s.aver);
+        // 레퍼런스를 이용하여 인스턴스에 접근한 다음에 항목에 값 넣는다.
+        arr[0].name = "홍길동";
+        arr[1].name = "임꺽정";
+        arr[2].name = "유관순";
 
+        // 레퍼런스를 통해 인스턴스의 각 항목 값을 꺼낸다.
+        System.out.printf("이름: %s\n", arr[0].name);
+        System.out.printf("이름: %s\n", arr[1].name);
+        System.out.printf("이름: %s\n", arr[2].name);
     }
 }
+
+// 결론!
+// - 여러 개의 인스턴스의 주소를 관리할 때는 
+//   레퍼런스 배열을 사용하는 게 편하다.

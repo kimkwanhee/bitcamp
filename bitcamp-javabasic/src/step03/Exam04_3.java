@@ -1,27 +1,17 @@
-//클래스 - 사용후
+// 클래스 사용 - public 클래스와 기본 클래스
 package step03;
 
 public class Exam04_3 {
     public static void main(String[] args) {
-
-        //확보된 메모리를 사용하려면 주소를 보관시킬 필요가 있다.
         
-        Score s1 = new Score();
+        // 다른 패키지의 클래스 사용
 
-        s1.name = "홍길동";
-      //  s.kor = 100;
-      //  s.eng = 90;
-       // s.math = 80;
-      //  s.sum = s.kor + s.eng + s.math;
-       // s.aver = s.sum / 3;
+        // => A 클래스는 public 이 아니다.
+        // => 따라서 다른 패키지의 클래스는 A를 사용할 수 없다.
+        //step03.test.A v1; // 컴파일 오류!
 
-        System.out.println(s1.name);
-       // System.out.printf("국어 : %d\n", s.kor);
-      //  System.out.printf("영어 : %d\n", s.eng);
-       // System.out.printf("수학 : %d\n", s.math);
-       // System.out.printf("합계 : %d\n", s.sum);
-      //  System.out.printf("평균 : %1f\n", s.aver);
-
-      step03.test.B v2;
+        // => B 클래스는 public 이다.
+        // => 그래서 다른 패키지에 소속된 클래스도 B를 사용할 수 있다.
+        step03.test.B v2;
     }
 }
