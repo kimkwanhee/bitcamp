@@ -4,6 +4,6 @@ public class Team {
     public String name;
     public String description;
     public int maxQty;
-    public Date startDate;
-    public Date endDate;
+    public String startDate;
+    public String endDate;
 }

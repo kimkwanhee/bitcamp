@@ -8,15 +8,10 @@ import java.util.Scanner;
 public class TeamController {
     // 이 클래스를 사용하기 전에 App 클래스에서 준비한 Scanner 객체를
     // keyScan 변수에 저장하라!
-    Scanner keyScan;
+    public Scanner keyScan;
 
     Team[] teams = new Team[1000];
     int teamIndex = 0;
-    
-    public TeamController(Scanner scanner) {
-        this.keyScan = scanner;
-    }
-    
 
     public void service(String menu, String option) {
         if (menu.equals("team/add")) {
@@ -121,8 +116,7 @@ public class TeamController {
             System.out.printf("최대인원(%d)? ", team.maxQty);
             updateTeam.maxQty = this.keyScan.nextInt();
             this.keyScan.nextLine();
-            System.out.printf("시작일(%s)? ");
-            team.startDate=Date.valueOf(this.keyScan.nextLine());
+            System.out.printf("시작일(%s)? ", team.startDate);
             updateTeam.startDate = this.keyScan.nextLine();
             System.out.printf("종료일(%s)? ", team.endDate);
             updateTeam.endDate = this.keyScan.nextLine();

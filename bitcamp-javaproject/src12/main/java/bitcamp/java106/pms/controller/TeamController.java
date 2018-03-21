@@ -121,8 +121,7 @@ public class TeamController {
             System.out.printf("최대인원(%d)? ", team.maxQty);
             updateTeam.maxQty = this.keyScan.nextInt();
             this.keyScan.nextLine();
-            System.out.printf("시작일(%s)? ");
-            team.startDate=Date.valueOf(this.keyScan.nextLine());
+            System.out.printf("시작일(%s)? ", team.startDate);
             updateTeam.startDate = this.keyScan.nextLine();
             System.out.printf("종료일(%s)? ", team.endDate);
             updateTeam.endDate = this.keyScan.nextLine();

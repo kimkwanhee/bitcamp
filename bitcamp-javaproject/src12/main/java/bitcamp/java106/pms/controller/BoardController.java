@@ -12,7 +12,6 @@ import bitcamp.java106.pms.util.Console;
 public class BoardController {
     Scanner keyScan;
 
-    BoardDao boarddao = new boardao();
     Board[] boards = new Board[1000];
     int boardIndex = 0;
 
@@ -54,16 +53,15 @@ public class BoardController {
         board.content = this.keyScan.nextLine();
 
         System.out.print("등록일? ");
-        board.createdDate = Date.valueOf(this.keyScan.nextLine());
+        board.createdDate = this.keyScan.nextLine();
 
-        boardDao.insert(board);
+        this.boards[this.boardIndex++] = board;
     }
 
     void onBoardList() {
         System.out.println("[게시물 목록]");
-        Board[] list = boardDao.list();
-        for (int i = 0 ; i < list.lenght i++) {
-            if (list[i] == null) continue;
+        for (int i = 0; i < this.boardIndex; i++) {
+            if (this.boards[i] == null) continue;
             System.out.printf("%d, %s, %s\n",
                 i, this.boards[i].title, this.boards[i].createdDate);
         }
@@ -76,11 +74,12 @@ public class BoardController {
             return;
         }
         
-        Board board = boardDao.get(Integer.parseInt(option));
+        int i = Integer.parseInt(option);
         
-        if (board == null) {
+        if (i < 0 || i >= this.boardIndex) {
             System.out.println("유효하지 않은 게시물 번호입니다.");
         } else {
+            Board board = this.boards[i];
             System.out.printf("팀명: %s\n", board.title);
             System.out.printf("설명: %s\n", board.content);
             System.out.printf("등록일: %s\n", board.createdDate);
@@ -93,20 +92,20 @@ public class BoardController {
             System.out.println("번호를 입력하시기 바랍니다.");
             return;
         }
-        int i = Integer.parseInt(option);
-        Board board = boardDao.get(i);
         
-        if (board == null) {
+        int i = Integer.parseInt(option);
+        
+        if (i < 0 || i >= this.boardIndex) {
             System.out.println("유효하지 않은 게시물 번호입니다.");
         } else {
+            Board board = this.boards[i];
             Board updateBoard = new Board();
             System.out.printf("제목(%s)? ", board.title);
             updateBoard.title = this.keyScan.nextLine();
             System.out.printf("설명(%s)? ", board.content);
             updateBoard.content = this.keyScan.nextLine();
             updateBoard.createdDate = board.createdDate;
-            updateBoard.no = board.no;
-            boardDao.update = (updateBoard);
+            this.boards[i] = updateBoard;
             System.out.println("변경하였습니다.");
         }
     }
@@ -119,19 +118,15 @@ public class BoardController {
         }
         
         int i = Integer.parseInt(option);
-        Board board = boardDao.get(i);
         
-        if (board == null) {
+        if (i < 0 || i >= this.boardIndex) {
             System.out.println("유효하지 않은 게시물 번호입니다.");
         } else {
             if (Console.confirm("정말 삭제하시겠습니까?")) {
                 this.boards[i] = null;
-                boardDao.delete(i);
                 System.out.println("삭제하였습니다.");
             }
         }
     }
     
 }
-
-//ver 13 - 게시물 등록일의 문자열을 객체로 저장한다.
