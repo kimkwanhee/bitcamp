@@ -2,7 +2,7 @@
 package step07;
 
 // 사용자 정의 데이터 타입
-// => 학생 데이터를 담을 새로운 구조의 메모리를 설계한다.
+//  학생 데이터를 담을 새로운 구조의 메모리를 설계한다.
 class Student {
     String name;
     int age;
@@ -20,21 +20,21 @@ class Calculator {
     public static int multiple(int a, int b) {return a * b;}
     public static int divide(int a, int b) {return a / b;}
 }
-public class Exam01_1 {
+public class ExamX_1 {
     public static void main(String[] args) {
         // 사용자 정의 데이터 타입을 사용하는 방법
-        // => new 명령을 사용하여 설계도에 기술된 대로 메모리를 준비한다.
-        // => 메모리는 Heap 영역에 생성된다.
-        // => 메모리 주소를 레퍼런스(주소 변수)에 저장한다.
+        //  new 명령을 사용하여 설계도에 기술된 대로 메모리를 준비한다.
+        //  메모리는 Heap 영역에 생성된다.
+        //  메모리 주소를 레퍼런스(주소 변수)에 저장한다.
         Student ref = new Student();
 
-        // => 클래스로 만든 메모리는 레퍼런스를 통해 접근한다.
+        //  클래스로 만든 메모리는 레퍼런스를 통해 접근한다.
         ref.name = "홍길동";
         ref.tel = "111-1111";
         ref.age = 20;
 
         // 클래스로 묶은 메서드를 사용하는 방법
-        // => 클래스 이름을 붙여 메서드를 호출한다.
+        //  클래스 이름을 붙여 메서드를 호출한다.
         int result = Calculator.plus(100, 200);
         int result2 = Calculator.minus(100, 200);
 
