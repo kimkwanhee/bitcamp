@@ -26,7 +26,8 @@ public class Test01 {
         //System.out.printf("요일: %s요일\n", weeks[i]);
         System.out.printf("요일: %s요일\n", weeks[c.get(Calendar.DAY_OF_WEEK)]);
         System.out.printf("주차: %d주차\n", c.get(Calendar.WEEK_OF_MONTH));
-        System.out.printf("일차: %d일차\n", c.get(Calendar.DAY_OF_YEAR));       
+        System.out.printf("일차: %d일차\n", c.get(Calendar.DAY_OF_YEAR));
+        
 
     }
 
