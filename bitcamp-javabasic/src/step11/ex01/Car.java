@@ -1,4 +1,4 @@
-package step11.ex1;
+package step11.ex01;
 
 public class Car {
     public String model;
@@ -13,3 +13,4 @@ public class Car {
         this.capacity = capacity;
     }
 }
+

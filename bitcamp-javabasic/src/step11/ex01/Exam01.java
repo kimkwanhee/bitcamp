@@ -1,5 +1,5 @@
 // 상속 - 사용 전
-package step11.ex1;
+package step11.ex01;
 
 public class Exam01 {
     public static void main(String[] args) {
