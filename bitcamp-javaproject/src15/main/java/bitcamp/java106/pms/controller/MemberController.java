@@ -10,10 +10,11 @@ import bitcamp.java106.pms.util.Console;
 public class MemberController {
     Scanner keyScan;
 
-    MemberDao memberDao = new MemberDao();
+    MemberDao memberDao;
     
-    public MemberController(Scanner scanner) {
+    public MemberController(Scanner scanner, MemberDao memberDao) {
         this.keyScan = scanner;
+        this.memberDao = memberDao;
     }
 
     public void service(String menu, String option) {
@@ -122,4 +123,5 @@ public class MemberController {
     
 }
 
-//ver 14 - MemberDao를 사용하여 회원 데이터를 관리한다.
+// ver 15 - MemberDao를 생성자에서 주입 받도록 변경.
+// ver 14 - MemberDao를 사용하여 회원 데이터를 관리한다.
