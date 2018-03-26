@@ -5,7 +5,8 @@
   - 기존의 배운 문법을 활용하는 방법을 익힌다.
 - 작업내용
   - 팀에서 수행할 작업을 등록/조회/변경/삭제할 수 있는 기능을 만든다.
-  > java -classpath bin bitcamp.java106.pms.App
+ ``` 
+> java -classpath bin bitcamp.java106.pms.App
 명령> team/add
 팀명? 비트비트
 ...
