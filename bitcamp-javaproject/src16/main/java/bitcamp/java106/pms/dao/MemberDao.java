@@ -26,7 +26,7 @@ package bitcamp.java106.pms.dao;
         }
         
         public void update(Member member) {
-            int i = this.getMemberIndex(member.id);
+            int i = this.getMemberIndex(member.getId());
             if (i != -1)
                 this.members[i] = member;
         }
@@ -41,7 +41,7 @@ package bitcamp.java106.pms.dao;
         private int getMemberIndex(String id) {
             for (int i = 0; i < this.memberIndex; i++) {
                 if (this.members[i] == null) continue;
-                if (id.equals(this.members[i].id.toLowerCase())) {
+                if (id.equals(this.members[i].getId().toLowerCase())) {
                     return i;
                 }
             }

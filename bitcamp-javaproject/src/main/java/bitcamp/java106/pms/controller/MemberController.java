@@ -38,13 +38,13 @@ public class MemberController {
         Member member = new Member();
         
         System.out.print("아이디? ");
-        member.id = this.keyScan.nextLine();
+        member.getId = this.keyScan.nextLine();
 
         System.out.print("이메일? ");
-        member.email = this.keyScan.nextLine();
+        member.getId.email = this.keyScan.nextLine();
 
         System.out.print("암호? ");
-        member.password = this.keyScan.nextLine();
+        member.getId.password = this.keyScan.nextLine();
 
         memberDao.insert(member);
     }
@@ -71,9 +71,9 @@ public class MemberController {
         if (member == null) {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
-            System.out.printf("아이디: %s\n", member.id);
-            System.out.printf("이메일: %s\n", member.email);
-            System.out.printf("암호: %s\n", member.password);
+            System.out.printf("아이디: %s\n", member.getId);
+            System.out.printf("이메일: %s\n", member.getId.email);
+            System.out.printf("암호: %s\n", member.getId.password);
         }
     }
 
@@ -90,7 +90,7 @@ public class MemberController {
             System.out.println("해당 아이디의 회원이 없습니다.");
         } else {
             Member updateMember = new Member();
-            System.out.printf("아이디: %s\n", member.id);
+            System.out.printf("아이디: %s\n", member.getId());
             updateMember.id = member.id;
             System.out.printf("이메일(%s)? ", member.email);
             updateMember.email = this.keyScan.nextLine();
