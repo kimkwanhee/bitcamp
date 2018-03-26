@@ -14,9 +14,53 @@ public class Team {
     public Date endDate;
     public Member[] members = new Member[10];
     
-    // 사용자 정의 데이터 타입에서 메서드 정의란?
+ // 사용자 정의 데이터 타입에서 메서드 정의란?
     // => 새 데이터 타입의 값을 다룰 연산자를 정의하는 것을 의미한다.
     
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getMaxQty() {
+        return maxQty;
+    }
+
+    public void setMaxQty(int maxQty) {
+        this.maxQty = maxQty;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+    
+    public Member[] getMembers() {
+        return members;
+    }
+
     // 연산자는 외부에서 사용하는 것이기 때문에 공개해야 한다.
     // => 그래서 public modifier를 사용한다.
     public int addMember(Member member) {
@@ -32,7 +76,7 @@ public class Team {
     public int deleteMember(String memberId) {
         for (int i = 0; i < this.members.length; i++) {
             if (this.members[i] == null) continue;
-            if (this.members[i].id.equals(memberId)) {
+            if (this.members[i].getId().equals(memberId)) {
                 this.members[i] = null;
                 return 1;
             }
@@ -43,7 +87,7 @@ public class Team {
     public boolean isExist(String memberId) {
         for (int i = 0; i < this.members.length; i++) {
             if (this.members[i] == null) continue;
-            if (this.members[i].id.equals(memberId)) {
+            if (this.members[i].getId().equals(memberId)) {
                 return true;
             }
         }
@@ -51,6 +95,7 @@ public class Team {
     }
 }
 
-// ver 15 - 멤버를 저장할 인스턴스 변수를 추가한다.
+//ver 16 - 캡슐화 적용. 겟터, 셋터 추가.
+//ver 15 - 멤버를 저장할 인스턴스 변수를 추가한다.
 //          팀 멤버 배열에 멤버 객체를 추가하고 빼는 메서드를 새로 정의한다.
-// ver 13 - 시작일, 종료일의 데이터 타입을 String에서 Date으로 변경
+//ver 13 - 시작일, 종료일의 데이터 타입을 String에서 Date으로 변경
