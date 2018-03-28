@@ -4,8 +4,10 @@ package bitcamp.java106.pms.controller;
 import java.sql.Date;
 import java.util.Scanner;
 
+import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
+import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
@@ -16,11 +18,16 @@ public class TaskController {
     Scanner keyScan;
     TeamDao teamDao;
     TaskDao taskDao;
+    MemberDao memberDao;
+    TeamMemberDao teamMemberDao;
     
-    public TaskController(Scanner scanner, TeamDao teamDao, TaskDao taskDao) {
+    public TaskController(Scanner scanner, TeamDao teamDao, TaskDao taskDao,
+            TeamMemberDao teamMemberDao, MemberDao memberDao) {
         this.keyScan = scanner;
         this.teamDao = teamDao;
         this.taskDao = taskDao;
+        this.teamMemberDao = teamMemberDao;
+        this.memberDao = memberDao;
     }
     
     public void service(String menu, String option) {
@@ -87,11 +94,10 @@ public class TaskController {
         System.out.print("작업자 아이디? ");
         String memberId = keyScan.nextLine();
         if (memberId.length() != 0) {
-            Member member = team.getMember(memberId);
-            if (member == null) {
+            if (!teamMemberDao.isExist(team.getName(), memberId)) {
                 System.out.printf("'%s'는 이 팀의 회원이 아닙니다. 작업자는 비워두겠습니다.", memberId);
             } else {
-                task.setWorker(member);
+                task.setWorker(this.memberDao.get(memberId));
             }
         }
         
@@ -139,7 +145,7 @@ public class TaskController {
         System.out.print("변경할 작업의 번호? ");
         int taskNo = Integer.parseInt(keyScan.nextLine());
         
-        Task originTask = taskDao.get(team.getName(), taskNo);
+        Task originTask = taskDao.get(team.getName(),taskNo);
         if (originTask == null) {
             System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
                     team.getName(), taskNo);
@@ -189,11 +195,10 @@ public class TaskController {
         if (memberId.length() == 0) {
             task.setWorker(originTask.getWorker());
         } else {
-            Member member = team.getMember(memberId);
-            if (member == null) {
+            if (!teamMemberDao.isExist(team.getName(),memberId)) {
                 System.out.printf("'%s'는 이 팀의 회원이 아닙니다. 작업자는 비워두겠습니다.", memberId);
             } else {
-                task.setWorker(member);
+                task.setWorker(this.memberDao.get(memberId));
             }
         }
         
@@ -210,7 +215,7 @@ public class TaskController {
         System.out.print("삭제할 작업의 번호? ");
         int taskNo = Integer.parseInt(keyScan.nextLine());
         
-        Task task = taskDao.get(team.getName(), taskNo);
+        Task task = taskDao.get(team.getName(),taskNo);
         if (task == null) {
             System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
                     team.getName(), taskNo);
@@ -230,7 +235,7 @@ public class TaskController {
         System.out.print("상태를 변경할 작업의 번호? ");
         int taskNo = Integer.parseInt(keyScan.nextLine());
         
-        Task task = taskDao.get(team.getName(), taskNo);
+        Task task = taskDao.get(team.getName(),taskNo);
         if (task == null) {
             System.out.printf("'%s'팀의 %d번 작업을 찾을 수 없습니다.\n",
                     team.getName(), taskNo);
