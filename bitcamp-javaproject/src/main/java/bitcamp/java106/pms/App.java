@@ -45,7 +45,7 @@ public class App {
         prepareTeamData(teamDao, memberDao);
         
         TeamController teamController = new TeamController(keyScan, teamDao);
-        TeamMemberController teamMemberController = new TeamMemberController(keyScan, teamDao, memberDao);
+        TeamMemberController teamMemberController = new TeamMemberController(keyScan, teamDao, memberDao, teamMemberDao);
         MemberController memberController = new MemberController(keyScan, memberDao);
         BoardController boardController = new BoardController(keyScan);
         TaskController taskController = new TaskController(keyScan, teamDao, taskDao);
@@ -121,7 +121,7 @@ public class App {
         memberDao.insert(member);
     }
     
-    static void prepareTeamData(TeamDao teamDao, MemberDao memberDao) {
+    static void prepareTeamData(TeamDao teamDao, TeamMemberDao teamMemberDao) {
         Team team = new Team();
         team.setName("t1");
         team.setMaxQty(5);

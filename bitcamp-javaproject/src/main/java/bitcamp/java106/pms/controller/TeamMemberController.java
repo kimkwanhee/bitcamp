@@ -13,8 +13,9 @@ public class TeamMemberController {
     Scanner keyScan;
     TeamDao teamDao;
     MemberDao memberDao;
+    TeamMemberDao teamMemberDao;
     
-    public TeamMemberController(Scanner scanner, TeamDao teamDao, MemberDao memberDao) {
+    public TeamMemberController(Scanner scanner, TeamDao teamDao) {
         this.keyScan = scanner;
         this.teamDao = teamDao;
         this.memberDao = memberDao;
@@ -54,7 +55,7 @@ public class TeamMemberController {
             return;
         }
         
-        if (team.isExist(memberId)) {
+        if (team.isExist(teamName, memberId)) {
             System.out.println("이미 등록된 회원입니다.");
             return;
         }
@@ -77,7 +78,7 @@ public class TeamMemberController {
         System.out.println("[팀 멤버 목록]");
         System.out.print("회원들: ");
         
-        Member[] members = team.getMembers();
+        String[] members = teamMemberDao.getMembers(teamName);
         
         for (int i = 0; i < members.length; i++) {
             if (members[i] == null) continue;
