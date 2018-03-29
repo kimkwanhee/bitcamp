@@ -63,7 +63,7 @@ public class TeamMemberController {
             return;
         }
         
-        teamMemberDao.addMember(teamName, memberId);
+        teamMemberDao.add(memberId);
     }
 
     void onTeamMemberList(String teamName) {

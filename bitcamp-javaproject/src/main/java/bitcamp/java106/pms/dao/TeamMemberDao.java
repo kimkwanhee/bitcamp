@@ -1,9 +1,33 @@
 package bitcamp.java106.pms.dao;
 
+
+import bitcamp.java106.pms.domain.Member;
+import bitcamp.java106.pms.domain.Team;
+import bitcamp.java106.pms.util.ArrayList;
+
 public class TeamMemberDao {
     
-    private Object[][] teamMembers = new Object[1000][2];
-    private int rowIndex;
+    private ArrayList teamcollection = new ArrayList();
+    private ArrayList membercollection = new ArrayList();
+    
+    public void insert(Team team) {
+        this.teamcollection.add(team);
+    }
+    
+    public void insert(Member member) {
+        this.membercollection.add(member);
+    }
+    
+    public void list() {
+        Member[] arr = new Member[membercollection.size()];
+        for (int i = 0; i < membercollection.size(); i++)
+            arr[i] = (Member) membercollection.get(i);
+        
+        Team[] arr = new Member[membercollection.size()];
+        for (int i = 0; i < membercollection.size(); i++)
+            arr[i] = (Member) membercollection.get(i);
+        return arr;
+    }
     
     private int getIndex(String teamName, String memberId) {
         String ptn = teamName.toLowerCase();
@@ -20,15 +44,13 @@ public class TeamMemberDao {
         return -1;
     }
     
-    public int addMember(String teamName, String memberId) {
-        if (this.isExist(teamName, memberId)) { 
-            return 0;
-        }
-        this.teamMembers[rowIndex][0] = teamName;
-        this.teamMembers[rowIndex][1] = memberId;
-        rowIndex++;
-        return 1;
+    public void Member(String memberId) {
+        int index = this.memberCollection.size(); i++)
+        if (index < 0)
+            return null;
+        return (Member) membercollection.get(index);
     }
+   
     
     public int deleteMember(String teamName, String memberId) {
         int index = this.getIndex(teamName, memberId);
@@ -36,10 +58,7 @@ public class TeamMemberDao {
             return 0;
         }
         
-        this.teamMembers[index][0] = null;
-        this.teamMembers[index][1] = null;
-        return 1;
-    }
+       
     
     public boolean isExist(String teamName, String memberId) {
         if (this.getIndex(teamName, memberId) < 0) {
