@@ -81,10 +81,10 @@ public class TeamMemberController {
         System.out.println("[팀 멤버 목록]");
         System.out.print("회원들: ");
         
-        String[] members = teamMemberDao.getMembers(teamName);
-        
-        for (int i = 0; i < members.length; i++) {
-            System.out.printf("%s, ", members[i]);
+        Iterator <String> iterator = teamMemberDao.getMembers(teamName);
+        while(
+        for (int i = 0; i < iterator.length; i++) {
+            System.out.printf("%s, ", iterator[i]);
         }
         System.out.println();
     }

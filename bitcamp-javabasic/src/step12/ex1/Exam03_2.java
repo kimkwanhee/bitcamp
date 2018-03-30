@@ -1,4 +1,4 @@
-//java.util.ArrayList의 indexOf()의 사용
+// java.util.ArrayList의 indexOf()의 사용
 package step12.ex1;
 
 import java.util.ArrayList;
