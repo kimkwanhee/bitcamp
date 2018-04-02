@@ -1,7 +1,6 @@
 // 팀 멤버 관리 기능을 모아 둔 클래스
 package bitcamp.java106.pms.controller;
 
-import java.util.Iterator;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.dao.MemberDao;
@@ -82,11 +81,10 @@ public class TeamMemberController {
         System.out.println("[팀 멤버 목록]");
         System.out.print("회원들: ");
         
-        Iterator<String> iterator = teamMemberDao.getMembers(teamName);
-        if (iterator != null) {
-            while (iterator.hasNext()) {
-                System.out.printf("%s, ", iterator.next());
-            }
+        String[] members = teamMemberDao.getMembers(teamName);
+        
+        for (int i = 0; i < members.length; i++) {
+            System.out.printf("%s, ", members[i]);
         }
         System.out.println();
     }
@@ -124,4 +122,3 @@ public class TeamMemberController {
 // ver 15 - 팀 멤버를 등록, 조회, 삭제할 수 있는 기능 추가. 
 // ver 14 - TeamDao를 사용하여 팀 데이터를 관리한다.
 // ver 13 - 시작일, 종료일을 문자열로 입력 받아 Date 객체로 변환하여 저장.
-
