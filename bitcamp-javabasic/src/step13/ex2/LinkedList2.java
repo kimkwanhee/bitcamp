@@ -104,4 +104,16 @@ public class LinkedList2<E> {
         }
     }
     
+    public E[] toArray(E[] arr) {
+        Bucket cursor = head;
+        int count = 0;
+        
+        while (cursor != tail) {
+            arr[count++] = cursor.value;
+            cursor = cursor.next;
+        }
+        
+        return arr;
+    }
+    
 }
