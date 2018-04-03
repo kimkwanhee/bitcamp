@@ -3,6 +3,7 @@
 package bitcamp.java106.pms.controller;
 
 import java.sql.Date;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import bitcamp.java106.pms.dao.TeamDao;
@@ -62,8 +63,9 @@ public class TeamController implements Controller {
 
     void onTeamList() {
         System.out.println("[팀 목록]");
-        Team[] teams = teamDao.list();
-        for (Team team : teams) {
+        Iterator<Team> iterator = teamDao.list();
+        while (iterator.hasNext()) {
+            Team team = iterator.next();
             System.out.printf("%s, %d, %s ~ %s\n", 
                     team.getName(), team.getMaxQty(), 
                     team.getStartDate(), team.getEndDate());
@@ -116,7 +118,8 @@ public class TeamController implements Controller {
             System.out.printf("종료일(%s)? ", team.getEndDate());
             updateTeam.setEndDate(Date.valueOf(this.keyScan.nextLine()));
             
-            teamDao.update(updateTeam);
+            int index = teamDao.indexOf(updateTeam.getName());
+            teamDao.update(index,updateTeam);
             System.out.println("변경하였습니다.");
         }
     }

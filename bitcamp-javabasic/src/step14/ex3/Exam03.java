@@ -8,7 +8,6 @@ package step14.ex3;
 //D 인터페이스 입장에서도 Exam03은  m2()메서드를 만든 것이기 때문에 상관없다.
 //왜? 어차피 구현된 메서드가 아니기 때문이다.
 public class Exam03 implements B,C,D {
-    //public 보다 좁게 공개 범위를 줄일  수 없다.
     public void m1() {} //B의 슈퍼인터페이스인 A 인터페이스 구현
     public void m2() {} //B와 D 인터페이스 구현
     public void m3() {} //C의 인터페이스 구현
