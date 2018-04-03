@@ -1,4 +1,4 @@
-// 이 클래스는 회원 관련 기능을 모두 둔 클래스이다.
+// Controller 규칙에 따라 메서드 작성
 package bitcamp.java106.pms.controller;
 
 import java.util.Scanner;

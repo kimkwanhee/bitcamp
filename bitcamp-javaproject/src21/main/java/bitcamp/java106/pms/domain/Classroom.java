@@ -54,5 +54,3 @@ public class Classroom {
     
     
 }
-
-//ver 20 - 클래스 추가

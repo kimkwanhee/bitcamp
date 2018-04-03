@@ -12,7 +12,7 @@ import bitcamp.java106.pms.domain.Team;
 
 //TeamMemberController는 Controller 규칙을 이행한다.
 //=> Controller 규칙에 따라 메서드를 만든다.
-public class TeamMemberController implements Controller  {
+public class TeamMemberController implements Controller {
     
     Scanner keyScan;
     TeamDao teamDao;
@@ -126,4 +126,3 @@ public class TeamMemberController implements Controller  {
 // ver 15 - 팀 멤버를 등록, 조회, 삭제할 수 있는 기능 추가. 
 // ver 14 - TeamDao를 사용하여 팀 데이터를 관리한다.
 // ver 13 - 시작일, 종료일을 문자열로 입력 받아 Date 객체로 변환하여 저장.
-
