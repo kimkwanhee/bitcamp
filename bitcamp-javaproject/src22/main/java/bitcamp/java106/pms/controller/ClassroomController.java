@@ -56,7 +56,7 @@ public class ClassroomController implements Controller {
         System.out.println("[수업 목록]");
         Iterator<Classroom> iterator = classroomDao.list();
         while (iterator.hasNext()) {
-            Classroom classroom = iterator.next(); 
+            Classroom classroom = iterator.next();
             System.out.printf("%d, %s, %s ~ %s, %s\n",
                 classroom.getNo(), classroom.getTitle(), 
                 classroom.getStartDate(), classroom.getEndDate(),
@@ -146,4 +146,5 @@ public class ClassroomController implements Controller {
 
 }
 
+//ver 22 - ClassroomDao 변경 사항에 맞춰 이 클래스를 변경한다.
 //ver 20 - 클래스 추가
