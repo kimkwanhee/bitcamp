@@ -1,10 +1,11 @@
-//미니 IoC 컨테이너
+// 미니 IoC 컨테이너 
 package bitcamp.java106.pms.context;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class ApplicationContext {
     private HashMap<String,Object> objPool = new HashMap<>();
     
     public ApplicationContext(String packageName, Map<String,Object> beans) throws Exception {
-        //다른 맵에서 들어있는 객체를 이 컨테이너에 복사한다.
+        // 다른 맵에서 들어있는 객체를 이 컨테이너에 복사한다.
         if (beans != null) {
             objPool.putAll(beans);
         }
@@ -31,7 +32,6 @@ public class ApplicationContext {
     }
     
     private void findAndInstantiateClasses(File dir, String packageName) throws Exception {
-        
         File[] files = dir.listFiles(new FileFilter() {
             public boolean accept(File pathname) {
                 if (pathname.isDirectory() || // 디렉토리 이거나
@@ -159,6 +159,16 @@ public class ApplicationContext {
     public Object getBean(String name) {
         return objPool.get(name);
     }
+    
+    public Object getBean(Class type) {
+        Collection objList = objPool.values();
+        for (Object obj : objList) {
+            if (obj.getClass() == type) 
+                return obj;
+        }
+        return null;
+    }
 }
 
+//ver 24 - 타입으로 객체를 찾는 getBean() 메서드 추가
 //ver 23 - 클래스 정의
