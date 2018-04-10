@@ -90,7 +90,11 @@ public class App {
                 onHelp();
             } else {
                 try {
-                    Controller controller = (Controller) iocContainer.getBean(menu);
+                    int slashIndex = menu.lastIndexOf("/");
+                    String controllerKey = (slashIndex < 0) ? 
+                            menu : menu.substring(0, slashIndex);
+
+                    Controller controller = (Controller) iocContainer.getBean(controllerKey);
 
                     if (controller != null) {
                         controller.service(menu, option);
@@ -114,5 +118,5 @@ public class App {
 //ver 25 - 예외 처리 코드 추가.
 //ver 24 - 파일 저장 기능 호출. 멤버 및 팀 데이터를 준비하는 메서드 제거.
 //ver 17 - Task 관리 기능 추가
-//ver 15 - TeamDao와 MemberDao 객체 생성. 
+// ver 15 - TeamDao와 MemberDao 객체 생성. 
 //          팀 멤버를 다루는 메뉴 추가.
