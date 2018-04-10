@@ -19,6 +19,7 @@ import bitcamp.java106.pms.dao.TeamMemberDao;
 import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.util.Console;
+
 public class App {
     
     static ApplicationContext iocContainer;
@@ -43,20 +44,20 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         
-        //기본 객체 준비
-       HashMap<String,Object> defaultBeans = new HashMap<>();
-       defaultBeans.put("java.util.Scanner", keyScan);
-       
-       //기본 객체와 함께 @Componet가 붙은 클래스의 객체를 준비한다.
-       iocContainer = new ApplicationContext(
-               "bitcamp.java106.pms", defaultBeans);
+        // 기본 객체 준비
+        HashMap<String,Object> defaultBeans = new HashMap<>();
+        defaultBeans.put("java.util.Scanner", keyScan);
+        
+        // 기본 객체와 함께 @Component가 붙은 클래스의 객체를 준비한다.
+        iocContainer = new ApplicationContext(
+                "bitcamp.java106.pms", defaultBeans);
         
         // 테스트용 데이터를 준비한다. 
         prepareMemberData();
         prepareTeamData();
         
         Console.keyScan = keyScan;
-        
+
         while (true) {
             String[] arr = Console.prompt();
 
@@ -74,8 +75,8 @@ public class App {
                 onHelp();
             } else {
                 int slashIndex = menu.lastIndexOf("/");
-                String controllerKey = (slashIndex < 0)?
-                        menu : menu.substring(0,slashIndex);
+                String controllerKey = (slashIndex < 0) ? 
+                        menu : menu.substring(0, slashIndex);
                 
                 Controller controller = (Controller) iocContainer.getBean(controllerKey);
                 
@@ -131,11 +132,11 @@ public class App {
     
     static void prepareTeamData() {
         
-            TeamDao teamDao = (TeamDao) iocContainer.getBean(
-                    "bitcamp.java106.pms.dao.TeamDao");
-            TeamMemberDao teamMemberDao = (TeamMemberDao) iocContainer.getBean(
-                    "bitcamp.java106.pms.dao.TeamMemberDao");
-                
+        TeamDao teamDao = (TeamDao) iocContainer.getBean(
+                "bitcamp.java106.pms.dao.TeamDao");
+        TeamMemberDao teamMemberDao = (TeamMemberDao) iocContainer.getBean(
+                "bitcamp.java106.pms.dao.TeamMemberDao");
+        
         Team team = new Team();
         team.setName("t1");
         team.setMaxQty(5);

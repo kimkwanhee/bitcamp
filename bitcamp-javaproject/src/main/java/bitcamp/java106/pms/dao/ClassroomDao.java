@@ -16,6 +16,7 @@ public class ClassroomDao extends AbstractDao<Classroom> {
     public ClassroomDao() throws Exception {
         load();
     }
+    
     public void load() throws Exception {
         Scanner in = new Scanner(new FileReader("data/classroom.csv"));
         while (true) {

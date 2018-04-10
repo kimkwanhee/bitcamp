@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
 
-    @Component("hi")
-    public class HiController implements Controller {
-        Scanner keyScan;
+@Component("hi")
+public class HiController implements Controller {
+    Scanner keyScan;
 
-        public HiController(Scanner scanner) {
-            this.keyScan = scanner;
-        }
+    public HiController(Scanner scanner) {
+        this.keyScan = scanner;
+    }
     public void service(String menu, String option) {
         if (menu.equals("hi")) {
             this.onHi(option);
@@ -24,3 +24,5 @@ import bitcamp.java106.pms.annotation.Component;
     }
 
 }
+
+//ver 23 - 유지보수 테스트를 위해 임시로 만듦.

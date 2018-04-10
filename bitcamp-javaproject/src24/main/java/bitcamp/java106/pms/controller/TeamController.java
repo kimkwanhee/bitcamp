@@ -15,7 +15,7 @@ public class TeamController implements Controller {
 
     Scanner keyScan;
     TeamDao teamDao;
-
+    
     public TeamController(Scanner scanner, TeamDao teamDao) {
         this.keyScan = scanner;
         this.teamDao = teamDao;
@@ -76,9 +76,9 @@ public class TeamController implements Controller {
         if (name == null) {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; // 값을 리턴하면 안되기 때문에 return 명령만 작성한다.
-            // 의미? 즉시 메서드 실행을 멈추고 이전 위치로 돌아간다.
+                    // 의미? 즉시 메서드 실행을 멈추고 이전 위치로 돌아간다.
         }
-
+        
         Team team = teamDao.get(name);
 
         if (team == null) {
@@ -88,7 +88,7 @@ public class TeamController implements Controller {
             System.out.printf("설명: %s\n", team.getDescription());
             System.out.printf("최대인원: %d\n", team.getMaxQty());
             System.out.printf("기간: %s ~ %s\n", 
-                    team.getStartDate(), team.getEndDate());
+                team.getStartDate(), team.getEndDate());
         }
     }
 
@@ -98,7 +98,7 @@ public class TeamController implements Controller {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return;
         }
-
+        
         Team team = teamDao.get(name);
 
         if (team == null) {
@@ -116,7 +116,7 @@ public class TeamController implements Controller {
             updateTeam.setStartDate(Date.valueOf(this.keyScan.nextLine()));
             System.out.printf("종료일(%s)? ", team.getEndDate());
             updateTeam.setEndDate(Date.valueOf(this.keyScan.nextLine()));
-
+            
             int index = teamDao.indexOf(updateTeam.getName());
             teamDao.update(index, updateTeam);
             System.out.println("변경하였습니다.");
@@ -129,7 +129,7 @@ public class TeamController implements Controller {
             System.out.println("팀명을 입력하시기 바랍니다.");
             return; 
         }
-
+        
         Team team = teamDao.get(name);
 
         if (team == null) {
@@ -141,6 +141,7 @@ public class TeamController implements Controller {
             }
         }
     }
+    
 }
 
 //ver 23 - @Component 애노테이션을 붙인다.

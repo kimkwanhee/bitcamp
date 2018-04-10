@@ -14,12 +14,12 @@ import bitcamp.java106.pms.util.Console;
 public class BoardController implements Controller {
     Scanner keyScan;
     BoardDao boardDao;
-
-    public BoardController(Scanner scanner) {
+    
+    public BoardController(Scanner scanner, BoardDao boardDao) {
         this.keyScan = scanner;
         this.boardDao = boardDao;
     }
-
+    
     public void service(String menu, String option) {
         if (menu.equals("board/add")) {
             this.onBoardAdd();
@@ -58,7 +58,7 @@ public class BoardController implements Controller {
         while (iterator.hasNext()) {
             Board board = iterator.next();
             System.out.printf("%d, %s, %s\n",
-                    board.getNo(), board.getTitle(), board.getCreatedDate());
+                board.getNo(), board.getTitle(), board.getCreatedDate());
         }
     }
 
@@ -68,9 +68,9 @@ public class BoardController implements Controller {
             System.out.println("번호를 입력하시기 바랍니다.");
             return;
         }
-
+        
         Board board = boardDao.get(Integer.parseInt(option));
-
+        
         if (board == null) {
             System.out.println("유효하지 않은 게시물 번호입니다.");
         } else {
@@ -86,9 +86,9 @@ public class BoardController implements Controller {
             System.out.println("번호를 입력하시기 바랍니다.");
             return;
         }
-
+        
         Board board = boardDao.get(Integer.parseInt(option));
-
+        
         if (board == null) {
             System.out.println("유효하지 않은 게시물 번호입니다.");
         } else {
@@ -99,7 +99,7 @@ public class BoardController implements Controller {
             System.out.printf("설명(%s)? ", board.getContent());
             updateBoard.setContent(this.keyScan.nextLine());
             updateBoard.setCreatedDate(board.getCreatedDate());
-
+            
             int index = boardDao.indexOf(board.getNo());
             boardDao.update(index, updateBoard);
             System.out.println("변경하였습니다.");
@@ -112,10 +112,10 @@ public class BoardController implements Controller {
             System.out.println("번호를 입력하시기 바랍니다.");
             return; 
         }
-
+        
         int i = Integer.parseInt(option);
         Board board = boardDao.get(i);
-
+        
         if (board == null) {
             System.out.println("유효하지 않은 게시물 번호입니다.");
         } else {
@@ -125,7 +125,7 @@ public class BoardController implements Controller {
             }
         }
     }
-
+    
 }
 
 //ver 23 - @Component 애노테이션을 붙인다. BoardDao를 받도록 생성자 변경.

@@ -14,6 +14,7 @@ public class MemberDao extends AbstractDao<Member> {
     public MemberDao() throws Exception {
         load();
     }
+    
     public void load() throws Exception {
         Scanner in = new Scanner(new FileReader("data/member.csv"));
         while (true) {
@@ -44,7 +45,7 @@ public class MemberDao extends AbstractDao<Member> {
         }
         out.close();
     }
-    
+        
     public int indexOf(Object key) {
         String id = (String) key;
         for (int i = 0; i < collection.size(); i++) {
@@ -55,6 +56,8 @@ public class MemberDao extends AbstractDao<Member> {
         }
         return -1;
     }
+    
+    
 }
 
 //ver 24 - File I/O 적용
