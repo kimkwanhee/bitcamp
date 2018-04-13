@@ -1,8 +1,9 @@
 package bitcamp.java106.pms.dao;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.ObjectOutputStream;
 import java.sql.Date;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -36,19 +37,20 @@ public class TeamDao extends AbstractDao<Team> {
         }
         in.close();
     }
-    
     public void save() throws Exception {
-        PrintWriter out = new PrintWriter(new FileWriter("data/team.csv"));
-        
-        Iterator<Team> teams = this.list();
-        
-        while (teams.hasNext()) {
-            Team team = teams.next();
-            out.printf("%s,%s,%d,%s,%s\n", 
-                    team.getName(), team.getDescription(), team.getMaxQty(),
-                    team.getStartDate(), team.getEndDate());
+        try (
+                ObjectOutputStream out = new ObjectOutputStream(
+                                new BufferedOutputStream(
+                                new FileOutputStream("data/team.data")));
+            ) {
+            Iterator<Team> teams = this.list();
+            
+            while (teams.hasNext()) {
+                out.writeObject(teams.next());
+            }
+        } catch (Exception e) {
+            System.out.println("게시물 데이터 출력 오류!");
         }
-        out.close();
     }
         
     public int indexOf(Object key) {

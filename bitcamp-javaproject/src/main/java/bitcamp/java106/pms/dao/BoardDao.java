@@ -1,8 +1,12 @@
 package bitcamp.java106.pms.dao;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.Date;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -40,20 +44,21 @@ public class BoardDao extends AbstractDao<Board> {
         }
         in.close();
     }
-    
+
     public void save() throws Exception {
-        PrintWriter out = new PrintWriter(new FileWriter("data/board.csv"));
-        
-        Iterator<Board> boards = this.list();
-        
-        // List에 보관된 데이터를 board.csv 파일에 저장한다.
-        // 기존에 저장된 데이터를 덮어쓴다. 즉 처음부터 다시 저장한다.
-        while (boards.hasNext()) {
-            Board board = boards.next();
-            out.printf("%d,%s,%s,%s\n", board.getNo(), board.getTitle(),
-                    board.getContent(), board.getCreatedDate());
+        try (
+                ObjectOutputStream out = new ObjectOutputStream(
+                                new BufferedOutputStream(
+                                new FileOutputStream("data/board.data")));
+            ) {
+            Iterator<Board> boards = this.list();
+            
+            while (boards.hasNext()) {
+                out.writeObject(boards.next());
+            }
+        } catch (Exception e) {
+            System.out.println("게시물 데이터 출력 오류!");
         }
-        out.close();
     }
     
     public int indexOf(Object key) {
@@ -75,4 +80,3 @@ public class BoardDao extends AbstractDao<Board> {
 //ver 18 - ArrayList를 이용하여 인스턴스(의 주소) 목록을 다룬다. 
 // ver 16 - 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.
 // ver 14 - BoardController로부터 데이터 관리 기능을 분리하여 BoardDao 생성.
-
