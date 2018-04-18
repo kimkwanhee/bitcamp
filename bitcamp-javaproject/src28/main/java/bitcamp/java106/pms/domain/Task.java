@@ -10,7 +10,7 @@ public class Task implements Serializable {
     public static final int WORKING = 1;
     public static final int COMPLETE = 9;
     
-    private static int count = 1;
+    public static int count = 1;
 
     private int no;
     private String title;
@@ -90,3 +90,7 @@ public class Task implements Serializable {
 //ver 27 - java.io.Serializable 인터페이스 구현
 //ver 24 - setNo() 변경
 //ver 17 - 사용자 정의 데이터 타입 생성
+
+
+
+

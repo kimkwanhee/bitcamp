@@ -41,3 +41,9 @@ public abstract class AbstractDao<E> {
 
 //ver 22 - generalization을 통해 클래스 추가
 
+
+
+
+
+
+

@@ -1,7 +1,6 @@
 // 역할: 응답에 관련된 도구를 다룬다.
 package bitcamp.java106.pms.server;
 
-import java.io.PrintStream;
 import java.io.PrintWriter;
 
 public class ServerResponse {
@@ -17,4 +16,3 @@ public class ServerResponse {
 }
 
 //ver 28 - 클래스 추가
-

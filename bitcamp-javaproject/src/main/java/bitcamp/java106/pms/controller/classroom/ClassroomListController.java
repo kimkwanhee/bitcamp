@@ -18,11 +18,10 @@ public class ClassroomListController implements Controller {
     public ClassroomListController(ClassroomDao classroomDao) {
         this.classroomDao = classroomDao;
     }
-    
+
     @Override
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
-        
         Iterator<Classroom> iterator = classroomDao.list();
         while (iterator.hasNext()) {
             Classroom classroom = iterator.next();

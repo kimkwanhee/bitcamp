@@ -19,16 +19,17 @@ public class ClassroomAddController implements Controller {
         this.classroomDao = classroomDao;
     }
     
+    @Override
     public void service(ServerRequest request, ServerResponse response) {
         Classroom classroom = new Classroom();
         classroom.setTitle(request.getParameter("title"));
-        classroom.setStartDate(new Date(System.currentTimeMillis()));
-        classroom.setEndDate(new Date(System.currentTimeMillis()));
+        classroom.setStartDate(Date.valueOf(request.getParameter("startDate")));
+        classroom.setEndDate(Date.valueOf(request.getParameter("endDate")));
         classroom.setRoom(request.getParameter("room"));
         classroomDao.insert(classroom);
         
         PrintWriter out = response.getWriter();
-        out.println("등록성공!");
+        out.println("등록 성공!");
     }
 }
 

@@ -1,12 +1,12 @@
 package bitcamp.java106.pms.dao;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.sql.Date;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Team;
@@ -19,24 +19,23 @@ public class TeamDao extends AbstractDao<Team> {
     }
     
     public void load() throws Exception {
-        Scanner in = new Scanner(new FileReader("data/team.csv"));
-        while (true) {
-            try {
-                String[] arr = in.nextLine().split(",");
-                Team team = new Team();
-                team.setName(arr[0]);
-                team.setDescription(arr[1]);
-                team.setMaxQty(Integer.parseInt(arr[2]));
-                team.setStartDate(Date.valueOf(arr[3]));
-                team.setEndDate(Date.valueOf(arr[4]));
-                this.insert(team);
-            } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
-                //e.printStackTrace();
-                break; // 반복문을 나간다.
+        try (
+                ObjectInputStream in = new ObjectInputStream(
+                               new BufferedInputStream(
+                               new FileInputStream("data/team.data")));
+            ) {
+        
+            while (true) {
+                try {
+                    this.insert((Team) in.readObject());
+                } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
+                    //e.printStackTrace();
+                    break; // 반복문을 나간다.
+                }
             }
         }
-        in.close();
     }
+    
     public void save() throws Exception {
         try (
                 ObjectOutputStream out = new ObjectOutputStream(
@@ -48,9 +47,7 @@ public class TeamDao extends AbstractDao<Team> {
             while (teams.hasNext()) {
                 out.writeObject(teams.next());
             }
-        } catch (Exception e) {
-            System.out.println("게시물 데이터 출력 오류!");
-        }
+        } 
     }
         
     public int indexOf(Object key) {
@@ -71,3 +68,8 @@ public class TeamDao extends AbstractDao<Team> {
 //ver 18 - ArrayList 클래스를 적용하여 객체(의 주소) 목록을 관리한다.
 //ver 16 - 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.
 //ver 14 - TeamController로부터 데이터 관리 기능을 분리하여 TeamDao 생성.
+
+
+
+
+

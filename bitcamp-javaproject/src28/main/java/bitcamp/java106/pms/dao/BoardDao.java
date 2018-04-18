@@ -4,12 +4,9 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.sql.Date;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Board;
@@ -22,29 +19,30 @@ public class BoardDao extends AbstractDao<Board> {
     }
     
     public void load() throws Exception {
-        Scanner in = new Scanner(new FileReader("data/board.csv"));
-        while (true) {
-            // 저장된 데이터를 한 줄 읽는다.
-            // 한 줄에 한 개의 게시물 데이터가 있다.
-            // 데이터 형식은 다음과 같다.
-            // "번호,제목,내용,등록일"
-            //
-            try {
-                String[] arr = in.nextLine().split(",");
-                Board board = new Board();
-                board.setNo(Integer.parseInt(arr[0]));
-                board.setTitle(arr[1]);
-                board.setContent(arr[2]);
-                board.setCreatedDate(Date.valueOf(arr[3]));
-                this.insert(board);
-            } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
-                //e.printStackTrace();
-                break; // 반복문을 나간다.
+        try (
+                ObjectInputStream in = new ObjectInputStream(
+                               new BufferedInputStream(
+                               new FileInputStream("data/board.data")));
+            ) {
+        
+            while (true) {
+                try {
+                    // 게시물 데이터를 읽을 때 작업 번호가 가장 큰 것으로 
+                    // 카운트 값을 설정한다.
+                    Board board = (Board) in.readObject();
+                    if (board.getNo() >= Board.count)
+                        Board.count = board.getNo() + 1; 
+                        // 다음에 새로 추가할 게시물의 번호는 현재 읽은 게시물 번호 보다 
+                        // 1 큰 값이 되게 한다.
+                    this.insert(board);
+                } catch (Exception e) { // 데이터를 모두 읽었거나 파일 형식에 문제가 있다면,
+                    //e.printStackTrace();
+                    break; // 반복문을 나간다.
+                }
             }
         }
-        in.close();
     }
-
+    
     public void save() throws Exception {
         try (
                 ObjectOutputStream out = new ObjectOutputStream(
@@ -56,9 +54,7 @@ public class BoardDao extends AbstractDao<Board> {
             while (boards.hasNext()) {
                 out.writeObject(boards.next());
             }
-        } catch (Exception e) {
-            System.out.println("게시물 데이터 출력 오류!");
-        }
+        } 
     }
     
     public int indexOf(Object key) {
@@ -80,3 +76,8 @@ public class BoardDao extends AbstractDao<Board> {
 //ver 18 - ArrayList를 이용하여 인스턴스(의 주소) 목록을 다룬다. 
 // ver 16 - 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.
 // ver 14 - BoardController로부터 데이터 관리 기능을 분리하여 BoardDao 생성.
+
+
+
+
+

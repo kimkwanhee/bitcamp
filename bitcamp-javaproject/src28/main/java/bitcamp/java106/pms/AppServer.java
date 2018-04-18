@@ -1,6 +1,7 @@
 // App을 서버로 만들기
 package bitcamp.java106.pms;
 
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -111,16 +112,16 @@ public class AppServer {
             } else {
                 out.println("해당 명령을 처리할 수 없습니다.");
             }
-                out.println();
+            out.println(); // 응답의 끝을 표시하기 위해 빈줄을 클라이언트로 보낸다.
             
         } catch (Exception e) {
             out.println("서버 오류!");
+            e.printStackTrace(out);
             out.println();
         } finally {
             out.close();
             in.close();
-            try {socket.close();} 
-            catch (Exception e) {}
+            try {socket.close();} catch (Exception e) {}
         }
     }
 
@@ -131,3 +132,9 @@ public class AppServer {
 }
 
 //ver 28 - 서버 만들기
+
+
+
+
+
+

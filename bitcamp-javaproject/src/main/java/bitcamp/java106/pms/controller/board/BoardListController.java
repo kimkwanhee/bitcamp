@@ -20,7 +20,7 @@ public class BoardListController implements Controller {
     
     @Override
     public void service(ServerRequest request, ServerResponse response) {
-        PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter(); //stringwirter 보관
         
         Iterator<Board> iterator = boardDao.list();
         while (iterator.hasNext()) {
