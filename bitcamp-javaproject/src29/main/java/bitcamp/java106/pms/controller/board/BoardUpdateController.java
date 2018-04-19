@@ -10,35 +10,38 @@ import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.server.ServerRequest;
 import bitcamp.java106.pms.server.ServerResponse;
 
-@Component("/board/add")
-public class BoardAddController implements Controller {
+@Component("/board/update")
+public class BoardUpdateController implements Controller {
     BoardDao boardDao;
     
-    public BoardAddController(BoardDao boardDao) {
+    public BoardUpdateController(BoardDao boardDao) {
         this.boardDao = boardDao;
     }
-     
+    
+    @Override
     public void service(ServerRequest request, ServerResponse response) {
-        Board board = new Board();
-        board.setTitle(request.getParameter("title"));
-        board.setContent(request.getParameter("content"));
-        board.setCreatedDate(new Date(System.currentTimeMillis()));
-         /*스레드 테스트 용 코드 
-        for (int i = 0; i < 300000000; i++) {
-            Math.asin(34.8); 
-        } */
-        
-        boardDao.insert(board);
-        
         PrintWriter out = response.getWriter();
-        out.println("등록 성공!");
+        
+        Board updateBoard = new Board();
+        updateBoard.setNo(Integer.parseInt(request.getParameter("no")));
+        updateBoard.setTitle(request.getParameter("title"));
+        updateBoard.setContent(request.getParameter("content"));
+        updateBoard.setCreatedDate(new Date(System.currentTimeMillis()));
+        
+        Board board = boardDao.get(updateBoard.getNo());
+        
+        if (board == null) {
+            out.println("유효하지 않은 게시물 번호입니다.");
+        } else {
+            int index = boardDao.indexOf(updateBoard.getNo());
+            boardDao.update(index, updateBoard);
+            out.println("변경하였습니다.");
+        }
     }
-
 }
 
-
 //ver 28 - 네트워크 버전으로 변경
-//ver 26 - BoardController에서 add() 메서드를 추출하여 클래스로 정의.
+//ver 26 - BoardController에서 update() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다. BoardDao를 받도록 생성자 변경.
 //ver 22 - BoardDao 변경 사항에 맞춰 이 클래스를 변경한다.
 //ver 18 - BoardDao 변경 사항에 맞춰 이 클래스를 변경한다.

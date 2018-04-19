@@ -1,7 +1,7 @@
 package bitcamp.java106.pms.controller.board;
 
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.util.Iterator;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
@@ -10,35 +10,29 @@ import bitcamp.java106.pms.domain.Board;
 import bitcamp.java106.pms.server.ServerRequest;
 import bitcamp.java106.pms.server.ServerResponse;
 
-@Component("/board/add")
-public class BoardAddController implements Controller {
+@Component("/board/list")
+public class BoardListController implements Controller {
     BoardDao boardDao;
     
-    public BoardAddController(BoardDao boardDao) {
+    public BoardListController(BoardDao boardDao) {
         this.boardDao = boardDao;
     }
-     
+    
+    @Override
     public void service(ServerRequest request, ServerResponse response) {
-        Board board = new Board();
-        board.setTitle(request.getParameter("title"));
-        board.setContent(request.getParameter("content"));
-        board.setCreatedDate(new Date(System.currentTimeMillis()));
-         /*스레드 테스트 용 코드 
-        for (int i = 0; i < 300000000; i++) {
-            Math.asin(34.8); 
-        } */
+        PrintWriter out = response.getWriter(); //stringwirter 보관
         
-        boardDao.insert(board);
-        
-        PrintWriter out = response.getWriter();
-        out.println("등록 성공!");
+        Iterator<Board> iterator = boardDao.list();
+        while (iterator.hasNext()) {
+            Board board = iterator.next();
+            out.printf("%d, %s, %s\n",
+                board.getNo(), board.getTitle(), board.getCreatedDate());
+        }
     }
-
 }
 
-
 //ver 28 - 네트워크 버전으로 변경
-//ver 26 - BoardController에서 add() 메서드를 추출하여 클래스로 정의.
+//ver 26 - BoardController에서 list() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다. BoardDao를 받도록 생성자 변경.
 //ver 22 - BoardDao 변경 사항에 맞춰 이 클래스를 변경한다.
 //ver 18 - BoardDao 변경 사항에 맞춰 이 클래스를 변경한다.
