@@ -33,24 +33,21 @@ public class TaskAddController implements Controller {
     
     @Override
     public void service(ServerRequest request, ServerResponse response) {
-        PrintWriter out = response.getWriter();
-        String teamName = request.getParameter("teamName");
-        
-        Team team = teamDao.get(teamName);
-        if (team == null) {
-            out.printf("'%s' 팀은 존재하지 않습니다.", teamName);
-            return;
-        }
-        
         Task task = new Task(team);
         task.setTitle(request.getParameter("title"));
         task.setStartDate(Date.valueOf(request.getParameter("startDate")));
         task.setEndDate(Date.valueOf(request.getParameter("endDate")));
         task.setWorker(this.memberDao.get(request.getParameter("memberId")));
         
-        taskDao.insert(task);
+        PrintWriter out = response.getWriter();
         
-        out.println("등록 성공!");
+        try {
+            boardDao.insert(board);
+            out.println("등록 성공!");
+        } catch (Exception e) {
+            out.println("등록 실패!");
+            e.printStackTrace(out);
+        }
     }
 
 }

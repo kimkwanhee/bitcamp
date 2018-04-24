@@ -13,26 +13,25 @@ import bitcamp.java106.pms.server.ServerResponse;
 @Component("/board/update")
 public class BoardUpdateController implements Controller {
     BoardDao boardDao;
-
+    
     public BoardUpdateController(BoardDao boardDao) {
         this.boardDao = boardDao;
     }
-
+    
     @Override
     public void service(ServerRequest request, ServerResponse response) {
         PrintWriter out = response.getWriter();
-
-        Board Board = new Board();
-        Board.setNo(Integer.parseInt(request.getParameter("no")));
-        Board.setTitle(request.getParameter("title"));
-        Board.setContent(request.getParameter("content"));
-        Board.setCreatedDate(new Date(System.currentTimeMillis()));
-
+        
+        Board board = new Board();
+        board.setNo(Integer.parseInt(request.getParameter("no")));
+        board.setTitle(request.getParameter("title"));
+        board.setContent(request.getParameter("content"));
+        board.setCreatedDate(new Date(System.currentTimeMillis()));
+        
         try {
-
-            int count = boardDao.update(Board);
+            int count = boardDao.update(board);
             if (count == 0) {
-                out.println("해당게시물이 존재하지 않습니다.");
+                out.println("해당 게시물이 존재하지 않습니다.");
             } else {
                 out.println("변경하였습니다.");
             }
@@ -42,6 +41,8 @@ public class BoardUpdateController implements Controller {
         }
     }
 }
+
+//ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - BoardController에서 update() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다. BoardDao를 받도록 생성자 변경.

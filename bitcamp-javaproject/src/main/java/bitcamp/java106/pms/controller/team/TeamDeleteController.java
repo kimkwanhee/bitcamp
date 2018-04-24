@@ -35,7 +35,7 @@ public class TeamDeleteController implements Controller {
         }
         
         } catch (Exception e) {
-            out.println("삭제실패");
+            out.println("삭제실패!");
             e.printStackTrace(out);
         }
     }

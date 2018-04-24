@@ -30,14 +30,15 @@ public class ClassroomAddController implements Controller {
         PrintWriter out = response.getWriter();
         try {
             classroomDao.insert(classroom);
-        out.println("등록 성공!");
-    } catch (Exception e) {
-        out.println("등록 실패!");
-        e.printStackTrace(out);
+            out.println("등록 성공!");
+        } catch (Exception e) {
+            out.println("등록 실패!");
+            e.printStackTrace(out);
+        }
     }
 }
-}
 
+//ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - ClassroomController에서 add() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다. ClassroomDao를 받도록 생성자 변경.
