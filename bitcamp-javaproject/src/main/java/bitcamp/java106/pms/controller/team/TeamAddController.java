@@ -15,26 +15,34 @@ import bitcamp.java106.pms.server.ServerResponse;
 public class TeamAddController implements Controller {
 
     TeamDao teamDao;
-    
+
     public TeamAddController(TeamDao teamDao) {
         this.teamDao = teamDao;
     }
 
     @Override
     public void service(ServerRequest request, ServerResponse response) {
-        PrintWriter out = response.getWriter();
+
 
         Team team = new Team();
+
         team.setName(request.getParameter("name"));
         team.setDescription(request.getParameter("description"));
         team.setMaxQty(Integer.parseInt(request.getParameter("maxQty")));
         team.setStartDate(Date.valueOf(request.getParameter("startDate")));
         team.setEndDate(Date.valueOf(request.getParameter("endDate")));
 
-        teamDao.insert(team);
-        
-        out.println("등록 성공!");
-    }
+        PrintWriter out = response.getWriter();
+
+        try {
+
+            teamDao.insert(team);
+            out.println("등록 성공!");
+        } catch (Exception e) {
+            out.println("등록실패");
+            e.printStackTrace(out);
+        }
+    }  
 }
 
 //ver 28 - 네트워크 버전으로 변경

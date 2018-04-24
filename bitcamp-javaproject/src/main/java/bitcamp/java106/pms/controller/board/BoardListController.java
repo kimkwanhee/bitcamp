@@ -1,7 +1,7 @@
 package bitcamp.java106.pms.controller.board;
 
 import java.io.PrintWriter;
-import java.util.Iterator;
+import java.util.List;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.controller.Controller;
@@ -20,13 +20,17 @@ public class BoardListController implements Controller {
     
     @Override
     public void service(ServerRequest request, ServerResponse response) {
-        PrintWriter out = response.getWriter(); //stringwirter 보관
-        
-        Iterator<Board> iterator = boardDao.list();
-        while (iterator.hasNext()) {
-            Board board = iterator.next();
-            out.printf("%d, %s, %s\n",
-                board.getNo(), board.getTitle(), board.getCreatedDate());
+        PrintWriter out = response.getWriter();
+
+        try {
+            List<Board> list = boardDao.selectList();
+            for (Board board : list) {
+                out.printf("%d, %s, %s\n",
+                        board.getNo(), board.getTitle(), board.getCreatedDate());
+            }
+        } catch (Exception e) {
+            out.println("목록 가져오기 실패!");
+            e.printStackTrace(out);
         }
     }
 }

@@ -24,13 +24,19 @@ public class TeamDeleteController implements Controller {
         PrintWriter out = response.getWriter();
         String name = request.getParameter("name");
         
-        Team team = teamDao.get(name);
+        try {
+        
+        int count = teamDao.delete(name);
 
-        if (team == null) {
-            out.println("해당 이름의 팀이 없습니다.");
+        if (count == 0) {
+            out.println("해당 게시물이 없습니다.");
         } else {
-            teamDao.delete(name);
             out.println("삭제하였습니다.");
+        }
+        
+        } catch (Exception e) {
+            out.println("삭제실패");
+            e.printStackTrace(out);
         }
     }
     
