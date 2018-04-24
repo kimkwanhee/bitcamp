@@ -1,8 +1,8 @@
 # 변경 내역
 
-- build.gradle 변경
-- eclipse 설정 파일 갱신
-- pms_board 테이블 생성
+ - build.gradle 변경
+ - eclipse 설정 파일 갱신
+ - pms_board 테이블 생성
 
 drop table pms_board;
 
@@ -19,10 +19,10 @@ alter table pms_board
 alter table pms_board
     modify column bno int not null auto_increment; 
       
-- Board.java 변경
-- BoardDao.java 변경
-- BoardXxxController.java 변경
-- pms_member 테이블 생성
+ - Board.java 변경
+ - BoardDao.java 변경
+ - BoardXxxController.java 변경
+ - pms_member 테이블 생성
 
 drop table pms_member;
 
@@ -35,10 +35,11 @@ create table pms_member (
 alter table pms_member
     add constraint pms_member_pk primary key (mid);
     
-Member.java 변경
-MemberDao.java 변경
-MemberXxxController.java 변경
-pms_classroom 테이블 생성
+ - Member.java 변경
+ - MemberDao.java 변경
+ - MemberXxxController.java 변경
+ - pms_classroom 테이블 생성
+
 drop table pms_classroom;
 
 create table pms_classroom (
@@ -54,10 +55,12 @@ alter table pms_classroom
     
 alter table pms_classroom
     modify column crno int not null auto_increment;
-Classroom.java 변경
-ClassroomDao.java 변경
-ClassroomXxxController.java 변경
-pms_team 테이블 생성
+    
+ - Classroom.java 변경
+ - ClassroomDao.java 변경
+ - ClassroomXxxController.java 변경
+ - pms_team 테이블 생성
+
 drop table pms_team;
 
 create table pms_team (
@@ -70,10 +73,12 @@ create table pms_team (
 
 alter table pms_team
     add constraint pms_team_pk primary key (name);
-Team.java 변경
-TeamDao.java 변경
-TeamXxxController.java 변경
-pms_task 테이블 생성
+    
+ - Team.java 변경
+ - TeamDao.java 변경
+ - TeamXxxController.java 변경
+ - pms_task 테이블 생성
+
 drop table pms_task;
 
 create table pms_task (
@@ -91,10 +96,12 @@ alter table pms_task
 
 alter table pms_task
     modify column tano int not null auto_increment;
-Task.java 변경
-TaskDao.java 변경
-TaskXxxController.java 변경
-pms_team_member 테이블 생성
+    
+ - Task.java 변경
+ - TaskDao.java 변경
+ - TaskXxxController.java 변경
+ - pms_team_member 테이블 생성
+
 drop table pms_team_member;
 
 create table pms_team_member (
