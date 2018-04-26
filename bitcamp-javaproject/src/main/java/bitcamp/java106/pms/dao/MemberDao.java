@@ -1,7 +1,6 @@
 package bitcamp.java106.pms.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,15 +8,20 @@ import java.util.List;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Member;
+import bitcamp.java106.pms.jdbc.DataSource;
 
 @Component
 public class MemberDao {
+
+    DataSource dataSource;
+    
+    public MemberDao(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+        
     public int delete(String id) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", "1111");
+            Connection con = dataSource.getConnection();
             PreparedStatement stmt = con.prepareStatement(
                 "delete from pms_member where mid=?");) {
             
@@ -27,11 +31,8 @@ public class MemberDao {
     }
     
     public List<Member> selectList() throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", "1111");
+            Connection con = dataSource.getConnection();
             PreparedStatement stmt = con.prepareStatement(
                 "select mid, email from pms_member");
             ResultSet rs = stmt.executeQuery();) {
@@ -48,11 +49,8 @@ public class MemberDao {
     }
 
     public int insert(Member member) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", "1111");
+            Connection con = dataSource.getConnection();
             PreparedStatement stmt = con.prepareStatement(
                 "insert into pms_member(mid,email,pwd) values(?,?,sha2(?,224))");) {
             
@@ -65,11 +63,8 @@ public class MemberDao {
     }
 
     public int update(Member member) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", "1111");
+            Connection con = dataSource.getConnection();
             PreparedStatement stmt = con.prepareStatement(
                 "update pms_member set email=?, pwd=sha2(?,224) where mid=?");) {
             
@@ -81,11 +76,8 @@ public class MemberDao {
     }
 
     public Member selectOne(String id) throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
         try (
-            Connection con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
-                "java106", "1111");
+            Connection con = dataSource.getConnection();
             PreparedStatement stmt = con.prepareStatement(
                 "select mid,email from pms_member where mid=?");) {
             
@@ -104,6 +96,7 @@ public class MemberDao {
     }    
 }
 
+//ver 32 - DB 커넥션 풀 적용
 //ver 31 - JDBC API 적용
 //ver 24 - File I/O 적용
 //ver 23 - @Component 애노테이션을 붙인다.
@@ -112,3 +105,9 @@ public class MemberDao {
 //ver 18 - ArrayList를 사용하여 객체(의 주소) 목록을 관리한다.
 //ver 16 - 인스턴스 변수를 직접 사용하는 대신 겟터, 셋터 사용.
 //ver 14 - MemberController로부터 데이터 관리 기능을 분리하여 MemberDao 생성.
+
+
+
+
+
+

@@ -10,6 +10,7 @@ import bitcamp.java106.pms.dao.MemberDao;
 import bitcamp.java106.pms.dao.TaskDao;
 import bitcamp.java106.pms.dao.TeamDao;
 import bitcamp.java106.pms.dao.TeamMemberDao;
+import bitcamp.java106.pms.domain.Member;
 import bitcamp.java106.pms.domain.Task;
 import bitcamp.java106.pms.domain.Team;
 import bitcamp.java106.pms.server.ServerRequest;
@@ -33,16 +34,28 @@ public class TaskAddController implements Controller {
     
     @Override
     public void service(ServerRequest request, ServerResponse response) {
-        Task task = new Task(team);
+        PrintWriter out = response.getWriter();
+        Task task = new Task();
         task.setTitle(request.getParameter("title"));
         task.setStartDate(Date.valueOf(request.getParameter("startDate")));
         task.setEndDate(Date.valueOf(request.getParameter("endDate")));
-        task.setWorker(this.memberDao.get(request.getParameter("memberId")));
-        
-        PrintWriter out = response.getWriter();
+        task.setTeam(new Team().setName(request.getParameter("teamName")));
+        task.setWorker(new Member().setId(request.getParameter("memberId")));
         
         try {
-            boardDao.insert(board);
+            Team team = teamDao.selectOne(task.getTeam().getName());
+            if (team == null) {
+                out.printf("'%s' 팀은 존재하지 않습니다.\n", task.getTeam().getName());
+                return;
+            }
+            
+            Member member = memberDao.selectOne(task.getWorker().getId());
+            if (member == null) {
+                out.printf("'%s' 회원은 존재하지 않습니다.\n", task.getWorker().getId());
+                return;
+            }
+            
+            taskDao.insert(task);
             out.println("등록 성공!");
         } catch (Exception e) {
             out.println("등록 실패!");
@@ -52,6 +65,7 @@ public class TaskAddController implements Controller {
 
 }
 
+//ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - TaskController에서 add() 메서드를 추출하여 클래스로 정의.
 //ver 23 - @Component 애노테이션을 붙인다.

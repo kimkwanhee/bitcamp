@@ -16,3 +16,7 @@ public class ServerResponse {
 }
 
 //ver 28 - 클래스 추가
+
+
+
+
