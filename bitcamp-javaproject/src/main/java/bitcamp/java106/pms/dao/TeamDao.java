@@ -1,12 +1,6 @@
 package bitcamp.java106.pms.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -20,7 +14,7 @@ public class TeamDao {
     
     SqlSessionFactory sqlSessionFactory;
     
-    public TeamDao( SqlSessionFactory sqlSessionFactory) {
+    public TeamDao(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
     }
     
@@ -66,6 +60,7 @@ public class TeamDao {
     }    
 }
 
+//ver 33 - Mybatis 적용
 //ver 32 - DB 커넥션 풀 적용
 //ver 31 - JDBC API 적용
 //ver 24 - File I/O 적용

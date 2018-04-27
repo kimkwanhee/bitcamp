@@ -66,8 +66,7 @@
       sdt=#{startDate},
       edt=#{endDate},
       mid=#{worker.id},
-      tnm=#{team.name},
-      stat=#{state} 
+      tnm=#{team.name}
     where tano=#{no}
   </update>
   

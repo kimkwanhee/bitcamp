@@ -1,8 +1,5 @@
 package bitcamp.java106.pms.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,16 +7,13 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import bitcamp.java106.pms.annotation.Component;
 import bitcamp.java106.pms.domain.Board;
-import bitcamp.java106.pms.jdbc.DataSource;
 
 @Component
 public class BoardDao {
     
     SqlSessionFactory sqlSessionFactory;
-    DataSource dataSource;
     
-    public BoardDao(DataSource dataSource, SqlSessionFactory sqlSessionFactory) {
-        this.dataSource = dataSource;
+    public BoardDao(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
     }
     
@@ -29,8 +23,7 @@ public class BoardDao {
                     "bitcamp.java106.pms.dao.BoardDao.delete", no);
             sqlSession.commit();
             return count;
-        
-        } 
+        }
     }
     
     public List<Board> selectList() throws Exception {
@@ -55,18 +48,18 @@ public class BoardDao {
                     "bitcamp.java106.pms.dao.BoardDao.update", board);
             sqlSession.commit();
             return count;
-            
         }
     }
 
     public Board selectOne(int no) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
-                    return sqlSession.selectOne(
-                            "bitcamp.java106.pms.dao.BoardDao.selectOne", no);
+            return sqlSession.selectOne(
+                    "bitcamp.java106.pms.dao.BoardDao.selectOne", no);
         }  
     }
 }
 
+//ver 33 - Mybatis 적용 
 //ver 32 - DB 커넥션 풀 적용
 //ver 31 - JDBC API 적용
 //ver 24 - File I/O 적용
