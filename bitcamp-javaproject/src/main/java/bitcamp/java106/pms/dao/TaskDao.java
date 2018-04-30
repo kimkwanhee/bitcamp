@@ -31,7 +31,7 @@ public class TaskDao {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             return sqlSession.selectList(
                     "bitcamp.java106.pms.dao.TaskDao.selectList", teamName);
-        } 
+        }
     }
 
     public int insert(Task task) throws Exception {
@@ -40,7 +40,7 @@ public class TaskDao {
                     "bitcamp.java106.pms.dao.TaskDao.insert", task);
             sqlSession.commit();
             return count;
-        } 
+        }
     }
 
     public int update(Task task) throws Exception {
@@ -49,16 +49,16 @@ public class TaskDao {
                     "bitcamp.java106.pms.dao.TaskDao.update", task);
             sqlSession.commit();
             return count;
-        } 
+        }
     }
 
     public Task selectOne(int no) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             return sqlSession.selectOne(
                     "bitcamp.java106.pms.dao.TaskDao.selectOne", no);
-        } 
+        }
     }
-    
+
     public int updateState(int no, int state) throws Exception {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             HashMap<String,Object> paramMap = new HashMap<>();

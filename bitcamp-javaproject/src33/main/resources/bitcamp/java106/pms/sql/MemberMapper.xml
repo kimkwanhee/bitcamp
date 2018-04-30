@@ -40,3 +40,10 @@
     delete from pms_member where mid=#{value}
   </delete>
 </mapper>
+
+
+
+
+
+
+

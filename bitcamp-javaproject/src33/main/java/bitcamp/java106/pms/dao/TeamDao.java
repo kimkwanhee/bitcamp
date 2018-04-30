@@ -11,7 +11,6 @@ import bitcamp.java106.pms.domain.Team;
 @Component
 public class TeamDao {
 
-    
     SqlSessionFactory sqlSessionFactory;
     
     public TeamDao(SqlSessionFactory sqlSessionFactory) {
@@ -56,11 +55,11 @@ public class TeamDao {
         try (SqlSession sqlSession = this.sqlSessionFactory.openSession()) {
             return sqlSession.selectOne(
                     "bitcamp.java106.pms.dao.TeamDao.selectOne", name);
-        }  
+        }
     }    
 }
 
-//ver 33 - Mybatis 적용
+//ver 33 - Mybatis 적용 
 //ver 32 - DB 커넥션 풀 적용
 //ver 31 - JDBC API 적용
 //ver 24 - File I/O 적용

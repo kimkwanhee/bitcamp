@@ -41,10 +41,10 @@
   </resultMap>
   
   <select id="selectList" 
-          resultMap="TaskMap" parameterType="String">
+          resultMap="TaskMap" parameterType="string">
     select tano, titl, sdt, edt, stat, mid, tnm 
     from pms_task
-    where tnm=#{value}
+    where tnm=#{value} 
     <!--  limit #{startIndex}, #{pageSize} -->
   </select>
   
@@ -66,7 +66,7 @@
       sdt=#{startDate},
       edt=#{endDate},
       mid=#{worker.id},
-      tnm=#{team.name}
+      tnm=#{team.name} 
     where tano=#{no}
   </update>
   
@@ -81,3 +81,10 @@
     where tano=#{no}
   </update>
 </mapper>
+
+
+
+
+
+
+

@@ -7,8 +7,7 @@
   
   <select id="selectList" 
           resultType="string" parameterType="string">
-    select mid 
-    from pms_team_member 
+    select mid from pms_team_member 
     where tnm=#{value}
     <!--  limit #{startIndex}, #{pageSize} -->
   </select>
@@ -29,3 +28,10 @@
     where tnm=#{teamName} and mid=#{memberId}
   </delete>
 </mapper>
+
+
+
+
+
+
+
