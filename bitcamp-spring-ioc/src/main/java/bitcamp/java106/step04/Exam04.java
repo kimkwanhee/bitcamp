@@ -12,9 +12,11 @@ public class Exam04 {
         ApplicationContext iocContainer = new ClassPathXmlApplicationContext(
                 "bitcamp/java106/step04/application-context-04.xml");
         
-        System.out.println(iocContainer.getBean("c1"));
-        System.out.println(iocContainer.getBean("c2"));
-        
     }
 
 }
+
+
+
+
+

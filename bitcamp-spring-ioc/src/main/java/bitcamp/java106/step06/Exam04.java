@@ -1,4 +1,4 @@
-// 프로퍼티 호출 
+// 팩토리 메서드 호출 - FactoryBean 구현체 
 package bitcamp.java106.step06;
 
 import org.springframework.context.ApplicationContext;
@@ -11,9 +11,11 @@ public class Exam04 {
                 "bitcamp/java106/step06/application-context-04.xml");
         
         System.out.println(iocContainer.getBean("c1"));
-      
     }
 
 }
+
+
+
 
 

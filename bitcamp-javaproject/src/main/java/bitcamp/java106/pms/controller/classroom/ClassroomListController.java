@@ -42,6 +42,4 @@ public class ClassroomListController implements Controller {
 //ver 31 - JDBC API가 적용된 DAO 사용
 //ver 28 - 네트워크 버전으로 변경
 //ver 26 - ClassroomController에서 list() 메서드를 추출하여 클래스로 정의.
-//ver 23 - @Component 애노테이션을 붙인다. ClassroomDao를 받도록 생성자 변경.
-//ver 22 - ClassroomDao 변경 사항에 맞춰 이 클래스를 변경한다.
-//ver 20 - 클래스 추가
+

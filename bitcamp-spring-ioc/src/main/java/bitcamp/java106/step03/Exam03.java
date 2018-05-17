@@ -1,4 +1,4 @@
-// 객체 생성 
+// 생성자 호출 
 package bitcamp.java106.step03;
 
 import org.springframework.context.ApplicationContext;
@@ -16,4 +16,8 @@ public class Exam03 {
     }
 
 }
+
+
+
+
 

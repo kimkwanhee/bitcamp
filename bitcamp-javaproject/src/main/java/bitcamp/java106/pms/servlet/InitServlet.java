@@ -33,3 +33,9 @@ public class InitServlet extends HttpServlet {
     // 다른 서블릿이 사용할 자원을 준비하는 일만 하기 때문에 
     // 굳이 클라이언트의 요청을 처리할 service() 메서드를 구현할 필요가 없다.
 }
+
+
+
+
+
+

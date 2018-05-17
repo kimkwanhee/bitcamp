@@ -12,11 +12,11 @@
         <property name="maker" value="비트자동차"/>
         <property name="cc" value="890"/>
         <property name="engine">
-            <bean class="bitcamp.java106.step04.Engine">
-                <property name="maker" value="비트자동차"/>
-                <property name="valve" value="16"/>
-                <property name="cylinder" value="8"/>
-            </bean>
+		    <bean class="bitcamp.java106.step04.Engine">
+		        <property name="maker" value="비트자동차"/>
+		        <property name="valve" value="16"/>
+		        <property name="cylinder" value="8"/>
+		    </bean>
         </property>
     </bean>
     
@@ -34,3 +34,9 @@
     </bean>
     
 </beans>
+
+
+
+
+
+

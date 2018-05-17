@@ -1,4 +1,4 @@
-// 생성자 호출 
+// 프로퍼티 호출 
 package bitcamp.java106.step04;
 
 import org.springframework.context.ApplicationContext;
@@ -19,5 +19,8 @@ public class Exam01 {
     }
 
 }
+
+
+
 
 

@@ -20,3 +20,10 @@
     <!-- prototype 객체는 getBean()을 호출할 때 생성된다. -->
     <bean id="c3" class="bitcamp.java106.step02.Car" scope="prototype"/>
 </beans>
+
+
+
+
+
+
+

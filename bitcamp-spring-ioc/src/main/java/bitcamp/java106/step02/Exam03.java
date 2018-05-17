@@ -1,4 +1,4 @@
-// 객체 생성 
+// 객체 생성 정책 - singleton, prototype
 package bitcamp.java106.step02;
 
 import org.springframework.context.ApplicationContext;
@@ -12,7 +12,7 @@ public class Exam03 {
         ApplicationContext iocContainer = new ClassPathXmlApplicationContext(
                 "bitcamp/java106/step02/application-context-03.xml");
         
-        BeanUtils.printBeanList(iocContainer);
+        BeanUtils.printBeanNames(iocContainer);
         
         // scope=singleton : 객체를 한 개만 생성해서 공유한다. 
         Car obj1 = (Car) iocContainer.getBean("c1");
@@ -30,4 +30,8 @@ public class Exam03 {
     }
 
 }
+
+
+
+
 
