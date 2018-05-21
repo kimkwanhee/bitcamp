@@ -40,7 +40,7 @@ public class BoardAddServlet extends HttpServlet {
             board.setContent(request.getParameter("content"));
 
             boardDao.insert(board);
-            response.sendRedirect("list");
+            response.sendRedirect("list"); //redirect 실행
             
         } catch (Exception e) {
             response.setContentType("text/html;charset=UTF-8");

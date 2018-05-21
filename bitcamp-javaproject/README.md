@@ -1,5 +1,9 @@
 # 자바 프로젝트
 
+## src40 - Filter, Listener 기술 적용
+ - 학습목표
+ 
+
 ## scr39 - forward, include 기술 적용
  - 학습목표 
    - forward와 include의 용도를 이해하고 적용할 수 있다.

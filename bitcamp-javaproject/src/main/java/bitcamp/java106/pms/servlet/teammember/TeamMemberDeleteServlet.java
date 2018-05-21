@@ -1,6 +1,7 @@
 package bitcamp.java106.pms.servlet.teammember;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,7 +32,6 @@ public class TeamMemberDeleteServlet extends HttpServlet {
             HttpServletRequest request, 
             HttpServletResponse response) throws ServletException, IOException {
         
-        request.setCharacterEncoding("UTF-8");
         String teamName = request.getParameter("teamName");
         String memberId = request.getParameter("memberId");
         
@@ -41,7 +41,10 @@ public class TeamMemberDeleteServlet extends HttpServlet {
             if (count == 0) {
                 throw new Exception("<p>해당 팀원이 존재하지 않습니다.</p>");
             }
-            response.sendRedirect("../view?name=" + teamName);
+            response.sendRedirect("../view?name=" + 
+                    URLEncoder.encode(teamName, "UTF-8"));
+            // 개발자가 요청이나 응답헤더를 직접 작성하여 값을 주고 받으로 한다면,
+            // URL 인코딩과 URL 디코딩을 손수 해 줘야 한다.
             
         } catch (Exception e) {
             RequestDispatcher 요청배달자 = request.getRequestDispatcher("/error");
@@ -53,6 +56,8 @@ public class TeamMemberDeleteServlet extends HttpServlet {
     
 }
 
+//ver 40 - CharacterEncodingFilter 필터 적용.
+//         request.setCharacterEncoding("UTF-8") 제거
 //ver 39 - forward 적용
 //ver 38 - redirect 적용
 //ver 37 - 컨트롤러를 서블릿으로 변경
