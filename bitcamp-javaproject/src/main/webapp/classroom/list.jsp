@@ -1,7 +1,8 @@
+<%@page import="bitcamp.java106.pms.domain.Classroom"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,21 +10,29 @@
 <title>강의 목록</title>
 </head>
 <body>
-<jsp:include page="/header.jsp"/>
-<h1>강의 목록(MVC + JSP 전용 태그 + EL + JSTL)</h1>
+
+<%
+out.flush();
+request.getRequestDispatcher("/header.jsp").include(request, response);%>
+
+<h1>강의 목록(MVC)</h1>
 <p><a href='form.html'>새 강의</a></p>
 <table border='1'>
 <tr>
     <th>번호</th><th>강의명</th><th>기간</th><th>강의실</th>
 </tr>
-<c:forEach items="${list}" var="classroom">
+<%
+List<Classroom> list = (List<Classroom>)request.getAttribute("list");
+for (Classroom classroom : list) {
+%>
 <tr>
-    <td>${classroom.no}</td>
-    <td><a href='view?no=${classroom.no}'>${classroom.title}</a></td>
-    <td>${classroom.startDate}~${classroom.endDate}</td>
-    <td>${classroom.room}</td>
+    <td><%=classroom.getNo()%></td>
+    <td><a href='view?no=<%=classroom.getNo()%>'><%=classroom.getTitle()%></a></td>
+    <td><%=classroom.getStartDate()%>~<%=classroom.getEndDate()%></td>
+    <td><%=classroom.getRoom()%></td>
 </tr>
-</c:forEach>
+<%}%>
 </table>
 </body>
 </html>
+    

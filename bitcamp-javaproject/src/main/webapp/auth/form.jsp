@@ -1,10 +1,22 @@
 <%@ page language="java" 
     contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>    
-<c:if test="${header.referer != null and !header.referer.endsWith('/auth/login')}">
-    <c:set scope="session" var="refererUrl" value="${header.referer}"/> 
-</c:if>
+<%
+String refererUrl = request.getHeader("Referer");
+if (refererUrl != null && !refererUrl.endsWith("/auth/login")) {
+    session.setAttribute("refererUrl", refererUrl);
+}
+String id = "";
+Cookie[] cookies = request.getCookies();
+if (cookies != null) {
+    for (Cookie cookie : cookies) {
+        if (cookie.getName().equals("id")) {
+            id = cookie.getValue();
+            break;
+        }
+    }
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,11 +24,11 @@
 <title>로그인</title>
 </head>
 <body>
-<h1>로그인(MVC + EL + JSTL)</h1>
+<h1>로그인(MVC)</h1>
 <form action='login' method='post'>
 <table border='1'>
 <tr><th>아이디</th>
-    <td><input type='text' name='id' value='${cookie.id.value}'></td></tr>
+    <td><input type='text' name='id' value='<%=id%>'></td></tr>
 <tr><th>암호</th>
     <td><input type='password' name='password'></td></tr>
 </table>
@@ -25,3 +37,4 @@
 </form>
 </body>
 </html>
+    
