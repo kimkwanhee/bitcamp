@@ -43,7 +43,7 @@
     <th>작업상태</th><td><select name='state'>
         <option value='0' ${task.state == 0 ? "selected" : ""}>작업대기</option>
         <option value='1' ${task.state == 1 ? "selected" : ""}>작업중</option>
-        <option value='9' ${task.state == 2 ? "selected" : ""}>작업완료</option>
+        <option value='9' ${task.state == 9 ? "selected" : ""}>작업완료</option>
     </select></td>
 </tr>
 </table>
