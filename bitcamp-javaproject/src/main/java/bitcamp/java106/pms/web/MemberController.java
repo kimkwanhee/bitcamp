@@ -20,6 +20,11 @@ public class MemberController {
         this.memberDao = memberDao;
     }
     
+    @RequestMapping("/form")
+    public void form() {
+        
+    }
+    
     @RequestMapping("/add")
     public String add(Member member) throws Exception {
           

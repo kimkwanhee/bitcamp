@@ -20,7 +20,7 @@ public class TeamController {
     TeamDao teamDao;
     TeamMemberDao teamMemberDao;
     TaskDao taskDao;
-    
+
     public TeamController(
             TeamDao teamDao, 
             TeamMemberDao teamMemberDao,
@@ -29,55 +29,60 @@ public class TeamController {
         this.teamMemberDao = teamMemberDao;
         this.taskDao = taskDao;
     }
-    
+
+    @RequestMapping("/form")
+    public void form() {
+
+    }
+
     @RequestMapping("/add")
     public String add(Team team) throws Exception {
-        
+
         teamDao.insert(team);
         return "redirect:list.do";
     }
-    
+
     @RequestMapping("/delete")
     public String delete(@RequestParam("name") String name) throws Exception {
-        
+
         HashMap<String,Object> params = new HashMap<>();
         params.put("teamName", name);
-        
+
         teamMemberDao.delete(params);
-        
+
         taskDao.deleteByTeam(name);
-        
+
         int count = teamDao.delete(name);
-        
+
         if (count == 0) {
             throw new Exception ("해당 팀이 없습니다.");
         }
         return "redirect:list.do";
     }
-    
+
     @RequestMapping("/list")
     public String list(Map<String,Object> map) throws Exception {
-        
+
         List<Team> list = teamDao.selectList();
         map.put("list", list);
         return "/team/list.jsp";
     }
-    
+
     @RequestMapping("/update")
     public String update(Team team) throws Exception {
-        
+
         int count = teamDao.update(team);
         if (count == 0) {
             throw new Exception("<p>해당 팀이 존재하지 않습니다.</p>");
         }
         return "redirect:list.do";
     }
-    
+
     @RequestMapping("/view")
     public String view(
             @RequestParam("name") String name,
             Map<String,Object> map) throws Exception {
-        
+
         Team team = teamDao.selectOneWithMembers(name);
         if (team == null) {
             throw new Exception("유효하지 않은 팀입니다.");
@@ -85,7 +90,7 @@ public class TeamController {
         map.put("team", team);
         return "/team/view.jsp";
     }
-    
+
     // GlobalBindingInitializer 에 등록했기 때문에 이 클래스에서는 제외한다.
     /*
     @InitBinder
@@ -99,7 +104,7 @@ public class TeamController {
                     }
                 });
     }
-    */
+     */
 }
 
 //ver 51 - Spring WebMVC 적용
