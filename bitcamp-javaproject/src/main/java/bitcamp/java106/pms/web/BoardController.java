@@ -1,9 +1,12 @@
 package bitcamp.java106.pms.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.MatrixVariable;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -13,9 +16,9 @@ import bitcamp.java106.pms.domain.Board;
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-    
+
     BoardDao boardDao;
-    
+
     public BoardController(BoardDao boardDao) {
         this.boardDao = boardDao;
     }
@@ -25,63 +28,72 @@ public class BoardController {
         // 입력 폼에서 사용할 데이터가 있다면 
         // 이 request handler에서 준비하면 된다.
         //model.addAttribute("프로퍼티명", "값");
-        
+
         // 요청 URL:
         //     http://localhost:8888/java106-java-project/board/form.do
         // 리턴할 view URL
         // = prefix + request handler URL + suffix
         // = "/WEB-INF/jsp/" + "board/form.do" + ".jsp"
     }
-    
+
     @RequestMapping("/add")
     public String add(Board board) throws Exception {
-        
+
         boardDao.insert(board);
-        return "redirect:list.do";
+        return "redirect:list";
     }
-    
+
     @RequestMapping("/delete")
     public String delete(@RequestParam("no") int no) throws Exception {
-        
+
         int count = boardDao.delete(no);
         if (count == 0) {
             throw new Exception("해당 게시물이 없습니다.");
         }
-        return "redirect:list.do";
+        return "redirect:list";
     }
-    
-    @RequestMapping("/list")
-    public void list(Map<String,Object> map) throws Exception {        
-            
-        List<Board> list = boardDao.selectList();
+
+    @RequestMapping("/list{page}")
+    public void list(
+            @MatrixVariable(defaultValue="1") int pageNo,
+            @MatrixVariable(defaultValue="3") int pageSize,
+            Map<String,Object> map) throws Exception {
+
+        HashMap<String,Object> params = new HashMap<>();
+        params.put("startRowNo", (pageNo - 1) * pageSize);
+        params.put("pageSize", pageSize);
+
+        List<Board> list = boardDao.selectList(params);
         map.put("list", list);
     }
-    
+
     @RequestMapping("/update")
     public String update(Board board) throws Exception {
-        
+
         int count = boardDao.update(board);
         if (count == 0) {
             throw new Exception("해당 게시물이 존재하지 않습니다.");
         } 
-        return "redirect:list.do";
+        return "redirect:list";
     }
-    
-    @RequestMapping("/view")
-    public void view(
-            @RequestParam("no") int no, 
+
+    @RequestMapping("{no}")
+    public String view(
+            @PathVariable int no, 
             Map<String,Object> map) throws Exception {
-        
+
         Board board = boardDao.selectOne(no);
         if (board == null) {
             throw new Exception("유효하지 않은 게시물 번호입니다.");
         }
         map.put("board", board);
+        return "board/view";
     }
 
 }
 
 //ver 52 - InternalResourceViewResolver 적용
+//         *.do 대신 /app/* 을 기준으로 URL 변경
 //ver 51 - Spring WebMVC 적용
 //ver 49 - 요청 핸들러의 파라미터 값 자동으로 주입받기
 //ver 48 - CRUD 기능을 한 클래스에 합치기
