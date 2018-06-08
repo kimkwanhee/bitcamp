@@ -44,7 +44,7 @@
   -->
   <select id="selectOne" parameterType="int" resultMap="BoardMap">
     select bno,titl,cont,cdt 
-    from pms2_board
+    from pms2_board 
     where bno=#{value}
   </select>
   
