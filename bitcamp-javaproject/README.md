@@ -1,5 +1,7 @@
 # 자바 프로젝트
 
+## src53 - 서비스 컴포넌트 적용
+
 ## src52 - Spring WebMVC 기타 설정
  - 학습목표
    - view resolver의 역할을 이해하고 설정할 수 있다.
