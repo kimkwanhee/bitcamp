@@ -8,7 +8,7 @@ public class Exam01_list {
     public static void main(String[] args) throws Exception {
         Class.forName("org.mariadb.jdbc.Driver");
         java.sql.Connection con = DriverManager.getConnection(
-                "jdbc:mariadb://localhost:3306/java106db?serverTimezone=UTC&useSSL=false",
+                "jdbc:mariadb://localhost:3306/java106db",
                 "java106", "1111");
         java.sql.Statement stmt = con.createStatement();
         java.sql.ResultSet rs = stmt.executeQuery(
@@ -25,3 +25,10 @@ public class Exam01_list {
         con.close();
     }
 }
+
+
+
+
+
+
+

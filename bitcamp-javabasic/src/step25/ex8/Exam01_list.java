@@ -1,4 +1,3 @@
-// 게시판 관리 - spring-ioc 트랜잭션 적용전.
 // mybatis + spring IoC - 트랜잭션 적용 전
 package step25.ex8;
 
@@ -22,3 +21,10 @@ public class Exam01_list {
         }
     }
 }
+
+
+
+
+
+
+
