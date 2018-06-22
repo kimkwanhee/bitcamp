@@ -9,10 +9,16 @@
 <title>view</title>
 </head>
 <body>
-<h1>Exam09_1의 실행 결과</h1>
+<jsp:include page="../header.jsp"/>
+
+<h1>Exam06_4의 실행 결과</h1>
+name: ${name}<br>
+age: ${age}<br>
+
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
-<%System.out.println("exam09_1.jsp 실행!");%>
+
 
 
 
