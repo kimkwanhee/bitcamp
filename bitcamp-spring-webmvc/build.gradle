@@ -8,6 +8,7 @@ compileJava {
     options.encoding = "UTF-8"
 }
 
+
 eclipse {
     wtp {
         facet {
