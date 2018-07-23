@@ -1,5 +1,5 @@
 if (location.href.split("?").length > 1) {
-	var tags = $(".input-view");
+	var tags = $(".input-view");  //새글
     tags.css("display", "none");
     
 	var no = location.href.split("?")[1].split("=")[1];
