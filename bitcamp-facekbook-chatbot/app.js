@@ -23,7 +23,7 @@
 'use strict';
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
-const
+const 
   https = require('https'),
   fs = require('fs'),
   request = require('request'),
@@ -35,12 +35,13 @@ const
 //app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 var options = {
-		   key: fs.readFileSync('/home/ec2-user/custom.key'),
-		   cert: fs.readFileSync('/home/ec2-user/www_kwanhee_xyz.crt')
-		};
-		https.createServer(options, app).listen(1337, ()=> {
-		   console.log('webhook is listening')
-		});
+    key: fs.readFileSync('/home/ec2-user/custom.key'),
+    cert: fs.readFileSync('/home/ec2-user/www_kwanhee_xyz.crt')
+};
+
+https.createServer(options, app).listen(1337, () => {
+    console.log('webhook is listening')
+});
 
 // Accepts POST requests at /webhook endpoint
 app.post('/webhook', (req, res) => {  
@@ -113,13 +114,41 @@ app.get('/webhook', (req, res) => {
 function handleMessage(sender_psid, received_message) {
   let response;
   
-  // Checks if the message contains text
-  if (received_message.text) {    
-    // Create the payload for a basic text message, which
-    // will be added to the body of our request to the Send API
+  if (received_message.text == 'hello') {    
     response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+      "text": `나도 반가워요~~~ ㅋ`
     }
+  } else if (received_message.text = 'menu') {
+      response = {
+              "attachment": {
+                "type": "template",
+                "payload": {
+                  "template_type": "generic",
+                  "elements": [{
+                    "title": "어떤 메뉴을 원하시나요?",
+                    "subtitle": "아래에 원하는 메뉴를 선택해 주세요!",
+                    "buttons": [
+                      {
+                        "type": "postback",
+                        "title": "치맥",
+                        "payload": "menu01",
+                      },
+                      {
+                        "type": "postback",
+                        "title": "불소",
+                        "payload": "menu02",
+                      },
+                      {
+                          "type": "postback",
+                          "title": "부막",
+                          "payload": "menu03",
+                      }
+                    ],
+                  }]
+                }
+              }
+            }
+  
   } else if (received_message.attachments) {
     // Get the URL of the message attachment
     let attachment_url = received_message.attachments[0].payload.url;
@@ -165,6 +194,12 @@ function handlePostback(sender_psid, received_postback) {
     response = { "text": "Thanks!" }
   } else if (payload === 'no') {
     response = { "text": "Oops, try sending another image." }
+  } else if (payload === 'menu01') {
+      response = { "text": "오~~ 탁월한 선택! 전지현 드라마 보셨군요!" }
+  } else if (payload === 'menu02') {
+      response = { "text": "그렇죠. 역시 불금에는 불고기, 소주가 최고죠! 이슬 한방울?" }
+  } else if (payload === 'menu03') {
+      response = { "text": "날씨가 후덥지근할 때는 부침에 막걸리 한 사발!" }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
