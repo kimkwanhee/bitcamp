@@ -24,7 +24,7 @@
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 // Imports dependencies and set up http server
 const
-  https = require('https').
+  https = require('https'),
   fs = requeire('fs'),
   request = require('request'),
   express = require('express'),
