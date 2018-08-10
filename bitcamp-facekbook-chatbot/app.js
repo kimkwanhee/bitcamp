@@ -39,8 +39,8 @@ var options = {
 		cert:fs.readFileSync('/home/ec2-user/www_kwanhee_xyz.crt')
 		
 };
-https.createServer(options, aop).listen(1337, () => {
-	console.log('webhook is listening')
+https.createServer(options, app).listen(1337, () => {
+	console.log('webhooks is listening')
 });
 
 // Accepts POST requests at /webhook endpoint
