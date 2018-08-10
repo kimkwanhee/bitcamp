@@ -40,7 +40,7 @@ var options = {
 		
 };
 https.createServer(options, aop).listen(1337, () => {
-	console.log('webhook is litening')
+	console.log('webhook is listening')
 });
 
 // Accepts POST requests at /webhook endpoint
