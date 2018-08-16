@@ -1,1 +1,1 @@
-var serverRoot = "http://localhost:8888/bitcamp-javaproject";
+var serverRoot = "http://kwanhee.xyz:8888/pms";
