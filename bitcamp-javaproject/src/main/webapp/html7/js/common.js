@@ -1,1 +1,1 @@
-var serverRoot = "http://kwanhee.xyz:8888/pms";
+var serverRoot = "http://www.kwanhee.xyz:8888/pms";
